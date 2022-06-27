@@ -10,7 +10,6 @@ public class ControllerIndex {
 
     @GetMapping("/")
     public String inicio(Model model){
-        log.info("Ejecutando El Controlador Spring MVC");
         return "index";
     }
 }

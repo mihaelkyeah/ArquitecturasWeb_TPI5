@@ -15,27 +15,32 @@ public class ClientService {
     @Autowired
     private ClientRepository client;
 
-    public ClientService(){super();}
+    public ClientService() {
+        super();
+    }
 
     @Transactional(readOnly = true)
-    public List<Client> listClient(){ return this.client.findAll();}
+    public List<Client> listClient() {
+        return this.client.findAll();
+    }
 
     @Transactional
-    public boolean save(Client c){
-        if (this.client.getByName(c.getName()) != null)
+    public boolean save(Client c) {
+        if (this.client.getByName(c.getName()) != null) {
             return false;
-        this.client.save(c);
-
+        }
+        this.client.saveAndFlush(c);
         return true;
     };
 
     @Transactional
-    public void delete(Long id){
-        this.client.deleteById(id);}
+    public void delete(Long id) {
+        this.client.deleteById(id);
+    }
 
     @Transactional(readOnly = true)
-    public Optional<Client> findClient(Long id){
-        return  this.client.findById(id);
+    public Optional<Client> findClient(Long id) {
+        return this.client.findById(id);
     }
 
 }
