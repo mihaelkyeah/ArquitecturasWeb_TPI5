@@ -1,5 +1,6 @@
 package com.example.arquitecturaweb_tp5.controller;
 
+import com.example.arquitecturaweb_tp5.dto.totalComprasPorClienteDTO;
 import com.example.arquitecturaweb_tp5.model.Client;
 import com.example.arquitecturaweb_tp5.servicios.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,11 @@ public class ClientController {
         } else {
             return new ResponseEntity<>(client.get(), HttpStatus.OK);
         }
+    }
+
+    @GetMapping(value = "/totalCompras", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<totalComprasPorClienteDTO> totalCompras(){
+        return this.cs.reporteTotalCompras();
     }
 
     @PostMapping("/add")

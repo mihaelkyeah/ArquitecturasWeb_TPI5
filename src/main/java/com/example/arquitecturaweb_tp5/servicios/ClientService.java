@@ -1,5 +1,6 @@
 package com.example.arquitecturaweb_tp5.servicios;
 
+import com.example.arquitecturaweb_tp5.dto.totalComprasPorClienteDTO;
 import com.example.arquitecturaweb_tp5.model.Client;
 import com.example.arquitecturaweb_tp5.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,4 +44,8 @@ public class ClientService {
         return this.client.findById(id);
     }
 
+    @Transactional(readOnly = true)
+    public List<totalComprasPorClienteDTO> reporteTotalCompras() {
+        return this.client.reporteTotales();
+    }
 }
