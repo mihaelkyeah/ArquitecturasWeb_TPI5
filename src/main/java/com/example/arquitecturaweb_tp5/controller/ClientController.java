@@ -18,13 +18,23 @@ public class ClientController {
     @Autowired
     private ClientService cs;
 
-    @RequestMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Client> allClients() {
         return cs.listClient();
     }
 
-    @RequestMapping(value = "/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/getClientById/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Client> getClientById(@PathVariable(value = "id") Long id) {
+        Optional<Client> client = this.cs.findClient(id);
+        if (client.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(client.get(), HttpStatus.OK);
+        }
+    }
+
+    @GetMapping(value = "/ClientExists/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getClientExists(@PathVariable(value = "id") Long id) {
         Optional<Client> client = this.cs.findClient(id);
         if (client.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -40,10 +50,16 @@ public class ClientController {
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/deleteByID/{id}")
     public ResponseEntity<?> deleteBook(@PathVariable(value = "id") Long id) {
+        //TODO verificar que exista id ticket
+
         this.cs.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+
+        //TODO else  return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+
+        //TODO PUT
     }
 
 }

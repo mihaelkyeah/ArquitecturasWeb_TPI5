@@ -10,6 +10,6 @@ public class ControllerIndex {
 
     @GetMapping("/")
     public String inicio(Model model){
-        return "index";
+        return "debe mostrar el template index solucionar";
     }
 }

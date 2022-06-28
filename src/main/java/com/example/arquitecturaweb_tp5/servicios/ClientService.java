@@ -26,7 +26,7 @@ public class ClientService {
 
     @Transactional
     public boolean save(Client c) {
-        if (this.client.getByName(c.getName()) != null) {
+        if (this.client.getByEmail(c.getEmail()) != null) {
             return false;
         }
         this.client.saveAndFlush(c);

@@ -1,5 +1,6 @@
 package com.example.arquitecturaweb_tp5.controller;
 
+import com.example.arquitecturaweb_tp5.model.Client;
 import com.example.arquitecturaweb_tp5.model.Product;
 import com.example.arquitecturaweb_tp5.servicios.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +19,13 @@ public class ProductController {
     @Autowired
     private ProductService ps;
 
-    @RequestMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Product> allClients() {
+    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Product> allProducts() {
         return ps.listProducts();
     }
 
-    @RequestMapping(value = "/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Product> getClientById(@PathVariable(value = "id") Long id) {
+    @GetMapping(value = "/getProductById/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Product> getProductById(@PathVariable(value = "id") Long id) {
         Optional<Product> product = this.ps.findProduct(id);
         if (product.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -34,16 +35,22 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> postBook(@RequestBody Product p) {
+    public ResponseEntity<?> postProduct(@RequestBody Product p) {
         if (this.ps.save(p))
             return new ResponseEntity<>(HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 
-    @DeleteMapping("delete/{id}")
-    public ResponseEntity<?> deleteBook(@PathVariable(value = "id") Long id) {
+    @DeleteMapping("/deleteByID/{id}")
+    public ResponseEntity<?> deleteProductById(@PathVariable(value = "id") Long id) {
+        //TODO verificar que exista id ticket
+
         this.ps.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+
+        //TODO else  return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+
+        //TODO PUT
     }
 
 }

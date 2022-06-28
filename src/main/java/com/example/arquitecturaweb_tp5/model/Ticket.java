@@ -5,36 +5,34 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 import lombok.Data;
 
 @Data
 @Entity
 @Table
-public class Sold {
+public class Ticket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idSold;
+    private Long idTicket;
+
+    private String Serial; //
+
     private Long idClient;
-    private Long idProduct;
-    private String count;
     private String date;
     private float total;
 
-    public Long getIdSold() {
-        return idSold;
+    public void setIdTicket(Long idTicket) {
+        this.idTicket = idTicket;
     }
 
-    public Long getIdProduct() {
-        return idProduct;
+    public Long getIdTicket() {
+        return idTicket;
     }
 
-    public String getCount() {
-        return count;
-    }
-
-    public void setCount(String count) {
-        this.count = count;
+    public void setIdClient(Long idClient) {
+        this.idClient = idClient;
     }
 
     public String getDate() {

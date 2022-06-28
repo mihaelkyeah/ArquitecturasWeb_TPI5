@@ -8,7 +8,7 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 
     // agregar funciones personalizadas
 
-    @Query(value = "SELECT c FROM Client c WHERE c.name = :name")
-    public Client getByName(String name);
+    @Query(value = "SELECT c FROM Client c WHERE c.email = :email")
+    public Client getByEmail(String email);
 
 }
