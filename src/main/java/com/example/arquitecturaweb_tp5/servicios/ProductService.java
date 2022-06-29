@@ -41,5 +41,7 @@ public class ProductService {
     public Optional<Product> findProduct(Long id) {
         return this.product.findById(id);
     }
-
+    @Transactional(readOnly = true)
+    public String masVendido() {return this.product.masVendido();
+    }
 }

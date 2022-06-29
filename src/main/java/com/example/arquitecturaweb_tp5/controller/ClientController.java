@@ -45,7 +45,7 @@ public class ClientController {
     }
 
     @GetMapping(value = "/totalCompras", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<totalComprasPorClienteDTO> totalCompras(){
+    public List<Object> totalCompras(){
         return this.cs.reporteTotalCompras();
     }
 

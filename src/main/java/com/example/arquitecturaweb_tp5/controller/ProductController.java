@@ -34,6 +34,11 @@ public class ProductController {
         }
     }
 
+    @GetMapping(value = "/get-mas-vendido", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String masVendido() {
+        return ps.masVendido();
+    }
+
     @PostMapping("/add")
     public ResponseEntity<?> postProduct(@RequestBody Product p) {
         if (this.ps.save(p))

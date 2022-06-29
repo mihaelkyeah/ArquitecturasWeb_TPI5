@@ -39,6 +39,12 @@ public class TicketController {
         return idTicket;
     }
 
+    @GetMapping("/getTicketById/ticket/{date}")
+    public List<Ticket> getTicketDate(@PathVariable(value = "date") String date) {
+        List<Ticket> ticketDate = this.ts.getTicketDate(date);
+        return ticketDate;
+    }
+
     //TODO DELETE
 
     //TODO PUT

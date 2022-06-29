@@ -45,7 +45,7 @@ public class ClientService {
     }
 
     @Transactional(readOnly = true)
-    public List<totalComprasPorClienteDTO> reporteTotalCompras() {
-        return this.client.reporteTotales();
+    public List<Object> reporteTotalCompras() {
+        return client.reporteTotales();
     }
 }

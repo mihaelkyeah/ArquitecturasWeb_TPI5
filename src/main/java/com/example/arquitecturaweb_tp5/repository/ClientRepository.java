@@ -15,5 +15,5 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     public Client getByEmail(String email);
 
     @Query(value = "SELECT c.name, c.lastName, sum(t.total) FROM Client c JOIN Ticket t ON c.IdClient = t.idClient GROUP BY c.name, c.lastName")
-    public List<totalComprasPorClienteDTO> reporteTotales();
+    public List<Object> reporteTotales();
 }

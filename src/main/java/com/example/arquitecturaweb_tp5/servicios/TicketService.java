@@ -42,5 +42,6 @@ public class TicketService {
         return  this.tr.getSpecificTicket(id, date);
 
     }
-
+    @Transactional(readOnly = true)
+    public List<Ticket> getTicketDate(String date) {return this.tr.getTicketDate(date);}
 }
