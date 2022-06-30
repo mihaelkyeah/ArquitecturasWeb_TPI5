@@ -8,9 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
-
-    // agregar funciones personalizadas
-
     @Query(value = "SELECT c FROM Client c WHERE c.email = :email")
     public Client getByEmail(String email);
 

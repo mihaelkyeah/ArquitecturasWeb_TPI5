@@ -28,6 +28,10 @@ public class TicketDetails {
         return idProduct;
     }
 
+    public void setIdTicket(Long idTicket) {
+        this.idTicket = idTicket;
+    }
+
     public void setIdProduct(Long idProduct) {
         this.idProduct = idProduct;
     }

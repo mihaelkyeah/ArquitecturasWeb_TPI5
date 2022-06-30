@@ -57,5 +57,13 @@ public class ProductController {
 
         //TODO PUT
     }
-
+        @PutMapping("/update/{id}")
+        public ResponseEntity<?> updateProduct(@RequestBody Product p, @PathVariable Long id) {
+            Optional<Product> product = this.ps.findProduct(id);
+            if(product != null){
+                if (this.ps.save(p))
+                    return new ResponseEntity<>(HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
 }

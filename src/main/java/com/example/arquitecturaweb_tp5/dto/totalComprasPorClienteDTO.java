@@ -1,7 +1,6 @@
 package com.example.arquitecturaweb_tp5.dto;
 
 import lombok.Data;
-
 @Data
 public class totalComprasPorClienteDTO {
     String name;

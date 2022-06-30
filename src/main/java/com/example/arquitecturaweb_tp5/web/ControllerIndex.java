@@ -1,15 +1,13 @@
 package com.example.arquitecturaweb_tp5.web;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@Slf4j
+@Controller
 public class ControllerIndex {
 
-    @GetMapping("/")
+    @GetMapping("/index")
     public String inicio(Model model){
-        return "debe mostrar el template index solucionar";
+        return "index";
     }
 }

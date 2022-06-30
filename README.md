@@ -12,7 +12,7 @@
 
 Link Page: Index
 ```
-http://localhost:8080/swagger-ui/index.html#/
+http://localhost:8080/#
 ```
 Link Documentación Api: SWAGGER
 ```

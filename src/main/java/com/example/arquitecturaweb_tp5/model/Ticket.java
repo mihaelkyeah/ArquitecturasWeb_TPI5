@@ -17,8 +17,6 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTicket;
 
-    private String Serial; //
-
     private Long idClient;
     private String date;
     private float total;

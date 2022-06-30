@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/ticketDetails")
@@ -35,12 +36,18 @@ public class TicketDetailsController {
     @DeleteMapping("/deleteByIdTicket/{id}")
     public ResponseEntity<?> deleteAllByIdTicket(@PathVariable(value = "id") Long id) {
        //TODO verificar que exista id ticket
-
         this.tds.deleteByIdTicket(id);
             return new ResponseEntity<>(HttpStatus.OK);
-
         //TODO else  return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    }
 
-        //TODO PUT
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateProduct(@RequestBody TicketDetails p, @PathVariable Long id) {
+        Optional<TicketDetails> ticket = this.tds.findTicketDetail(id);
+        if(ticket != null){
+            if (this.tds.save(p))
+                return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 }

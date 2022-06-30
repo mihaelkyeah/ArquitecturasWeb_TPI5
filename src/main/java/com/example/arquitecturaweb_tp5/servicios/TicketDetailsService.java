@@ -34,7 +34,8 @@ public class TicketDetailsService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<TicketDetails> findSold(Long id) {
+    public Optional<TicketDetails> findTicketDetail(Long id) {
         return this.td.findById(id);
     }
+
 }

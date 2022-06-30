@@ -1,6 +1,4 @@
 package com.example.arquitecturaweb_tp5.controller;
-
-import com.example.arquitecturaweb_tp5.dto.totalComprasPorClienteDTO;
 import com.example.arquitecturaweb_tp5.model.Client;
 import com.example.arquitecturaweb_tp5.servicios.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,13 +57,18 @@ public class ClientController {
     @DeleteMapping("/deleteByID/{id}")
     public ResponseEntity<?> deleteBook(@PathVariable(value = "id") Long id) {
         //TODO verificar que exista id ticket
-
         this.cs.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
 
-        //TODO else  return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-
-        //TODO PUT
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateCliente(@RequestBody Client c, @PathVariable Long id) {
+        Optional<Client> client = this.cs.findClient(id);
+        if(client != null){
+            if (this.cs.save(c))
+                return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 
 }
