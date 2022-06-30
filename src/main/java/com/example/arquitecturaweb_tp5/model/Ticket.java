@@ -26,7 +26,7 @@ public class Ticket {
     }
 
     public Long getIdTicket() {
-        return idTicket;
+        return this.idTicket;
     }
 
     public void setIdClient(Long idClient) {
@@ -42,11 +42,11 @@ public class Ticket {
     }
 
     public Long getIdClient() {
-        return idClient;
+        return this.idClient;
     }
 
     public float getTotal() {
-        return total;
+        return this.total;
     }
 
     public void setTotal(float total) {

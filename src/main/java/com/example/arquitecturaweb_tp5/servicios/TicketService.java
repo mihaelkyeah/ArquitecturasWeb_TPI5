@@ -21,9 +21,8 @@ public class TicketService {
     }
 
     @Transactional
-    public Boolean save(Ticket i) {
-        this.tr.saveAndFlush(i);
-        return true;
+    public Ticket save(Ticket i) {
+        return  this.tr.saveAndFlush(i);
     }
 
     @Transactional

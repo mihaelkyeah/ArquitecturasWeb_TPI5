@@ -56,7 +56,6 @@ public class ProductController {
 
         //TODO else  return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 
-        //TODO PUT
     }
         @PutMapping("/update/{id}")
         public ResponseEntity<?> updateProduct(@RequestBody Product p, @PathVariable Long id) {
