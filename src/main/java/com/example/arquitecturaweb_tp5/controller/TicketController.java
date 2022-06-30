@@ -85,9 +85,9 @@ public class TicketController {
         return idTicket;
     }
 
-    @GetMapping("/getTicketById/ticket/{date}")
-    public List<Ticket> getTicketDate(@PathVariable(value = "date") String date) {
-        List<Ticket> ticketDate = this.ts.getTicketDate(date);
+    @GetMapping(value = "/date/{date}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Ticket> getTicketDate(@PathVariable(value = "date") String d) {
+        List<Ticket> ticketDate = this.ts.getTicketDate(d);
         return ticketDate;
     }
 

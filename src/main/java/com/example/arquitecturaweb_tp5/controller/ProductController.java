@@ -1,5 +1,6 @@
 package com.example.arquitecturaweb_tp5.controller;
 
+import com.example.arquitecturaweb_tp5.dto.ProductDTO;
 import com.example.arquitecturaweb_tp5.model.Client;
 import com.example.arquitecturaweb_tp5.model.Product;
 import com.example.arquitecturaweb_tp5.servicios.ProductService;
@@ -34,8 +35,8 @@ public class ProductController {
         }
     }
 
-    @GetMapping(value = "/get-mas-vendido", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String masVendido() {
+    @GetMapping(value = "/mas-vendido", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ProductDTO masVendido() {
         return ps.masVendido();
     }
 

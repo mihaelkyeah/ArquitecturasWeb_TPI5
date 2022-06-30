@@ -1,5 +1,6 @@
 package com.example.arquitecturaweb_tp5.servicios;
 
+import com.example.arquitecturaweb_tp5.dto.ProductDTO;
 import com.example.arquitecturaweb_tp5.model.Product;
 import com.example.arquitecturaweb_tp5.repository.ProductReporitory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,8 @@ public class ProductService {
         return this.product.findById(id);
     }
     @Transactional(readOnly = true)
-    public String masVendido() {return this.product.masVendido();
+    public ProductDTO masVendido() {
+        ProductDTO p = this.product.masVendido().get(0);
+        return p;
     }
 }
