@@ -1,5 +1,5 @@
-document.addEventListener("DOMContentLoaded", iniciarPagina);
 "use strict";
+document.addEventListener("DOMContentLoaded", iniciarPagina);
 
 //TODO login sensillo (verificar si existe el cliente)
 const url_inicio = '../pages/login.html';
@@ -639,5 +639,4 @@ function iniciarPagina() {
     // function toggleMenu() {
     //     document.querySelector(".navigation").classList.toggle("show");
     // }
-
 }

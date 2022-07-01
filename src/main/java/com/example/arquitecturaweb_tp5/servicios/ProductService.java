@@ -3,6 +3,7 @@ package com.example.arquitecturaweb_tp5.servicios;
 import com.example.arquitecturaweb_tp5.dto.ProductDTO;
 import com.example.arquitecturaweb_tp5.model.Product;
 import com.example.arquitecturaweb_tp5.repository.ProductReporitory;
+import com.example.arquitecturaweb_tp5.repository.TicketDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,8 @@ public class ProductService {
 
     @Autowired
     public ProductReporitory product;
+    @Autowired
+    public TicketDetailsRepository tdr;
 
     public ProductService() {
         super();
@@ -69,5 +72,17 @@ public class ProductService {
     public ProductDTO masVendido() {
         ProductDTO p = this.product.masVendido().get(0);
         return p;
+    }
+
+    @Transactional(readOnly = true)
+    public Product existProduct(String name) {
+        return this.product.getByName(name);
+    }
+
+    @Transactional(readOnly = true)
+    public boolean buyLimit(Long idCliente, Long idProduct,String dateNow, int productLimit) {
+        if(this.tdr.getCountSoldStartsWith(idCliente,idProduct, dateNow) >= productLimit)
+            return true;
+        return false;
     }
 }

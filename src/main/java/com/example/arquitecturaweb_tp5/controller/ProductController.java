@@ -62,8 +62,10 @@ public class ProductController {
                     content = @Content) })
     @PostMapping("/add")
     public ResponseEntity<?> postProduct(@RequestBody Product p) {
-        if (this.ps.save(p))
-            return new ResponseEntity<>(HttpStatus.OK);
+        if(this.ps.existProduct(p.getName()) != null){
+            if (this.ps.save(p))
+                return new ResponseEntity<>(HttpStatus.OK);
+        }
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 
@@ -71,17 +73,19 @@ public class ProductController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Producto eliminado",
                     content = { @Content}),
+            @ApiResponse(responseCode = "406", description = "Producto no Encontrado",
+            content = @Content)
     })
     @DeleteMapping("/deleteByID/{id}")
     public ResponseEntity<?> deleteProductById(@PathVariable(value = "id") Long id) {
-        //TODO verificar que exista id ticket
-
+        Optional<Product> product = this.ps.findProduct(id);
+        if (product.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
         this.ps.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
-
-        //TODO else  return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-
     }
+
     @Operation (summary = "Actualiza un Producto")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Producto actualizado",

@@ -1,8 +1,6 @@
 package com.example.arquitecturaweb_tp5.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import com.example.arquitecturaweb_tp5.dto.ticketCompraDto;
@@ -35,6 +33,11 @@ public class TicketController {
     private ProductService ps;
 
     private  List<TicketDetails> lista = new ArrayList<TicketDetails>();
+    private Ticket ticket = new Ticket();
+
+    private Long idTicket;
+
+    private int productLimit;
 
     @Operation(summary = "Retorna todos los Ticket")
     @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -51,56 +54,31 @@ public class TicketController {
     @PostMapping(value="/add", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<?> saveTicket(@RequestBody ticketCompraDto tdto)  {
-
         this.lista=tdto.getTicketDetails();
-        Ticket save = new Ticket();
-        boolean correct = true;
-        Long idTicket = null;
-
+        this.idTicket = null;
+        this.ticket = tdto.getTicket();
+        boolean puedeComprar = false;
+        String dateExact = this.ts.nowExact();
+        String dateNow = this.ts.nowDate();
         for (TicketDetails ts : this.lista ) {
-            if(ps.findProduct(ts.getIdProduct()).isEmpty()){//si el producto no existe seteo null
-                correct=false;
-                //TODO  verificar que el cliente pueda comprar de esos productos
+            if(ps.findProduct(ts.getIdProduct()).isEmpty())
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
+            puedeComprar = ps.buyLimit(ticket.getIdClient(),ts.getIdProduct(),dateNow, this.productLimit);
+            if(puedeComprar)
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
-        //Nota: si esta todo ok con los productos genero el ticket
-        save =tdto.getTicket();
-        String  date = now();
-        save.setDate(date);//pone la fecha actuar
-        Ticket nuevo = this.ts.save(save);
-
+        ticket.setDate(dateExact);//pone la fecha actuar
+        Ticket nuevo = this.ts.save(ticket);
         if (nuevo!=null){
-            Long idClient = nuevo.getIdClient();
-            idTicket = nuevo.getIdTicket();//aca se rompe
-            //idTicket = this.getIdTicket(tdto.getTicket().getIdClient(),tdto.getTicket().getDate());
+            idTicket = nuevo.getIdTicket();
+        }else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
         for(TicketDetails tds : lista ){
             tds.setIdTicket(idTicket);
             this.tds.save(tds);
         }
-
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-
-    /*
-    @PostMapping("/add")
-    public Long saveTicket(@RequestBody Ticket s) {
-        if (this.ts.save(s)){
-            Long idTicket = this.getIdTicket(s.getIdClient(),s.getDate());
-            return idTicket;
-        }
-        return null;
-    }*/
-
-    public  String now() {
-        String DATE_FORMAT_NOW = "yyyy-MM-dd HH:mm:ss";
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
-        return sdf.format(cal.getTime());
     }
 
     @Operation(summary = "Retorna un idTicket segun el idClient y la fecha")
@@ -146,3 +124,13 @@ public class TicketController {
     }
 
 }
+
+/*
+    @PostMapping("/add")
+    public Long saveTicket(@RequestBody Ticket s) {
+        if (this.ts.save(s)){
+            Long idTicket = this.getIdTicket(s.getIdClient(),s.getDate());
+            return idTicket;
+        }
+        return null;
+    }*/

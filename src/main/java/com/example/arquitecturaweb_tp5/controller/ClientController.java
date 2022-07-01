@@ -13,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.print.Book;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,9 +64,11 @@ public class ClientController {
 
     @Operation (summary = "Retorna un reporte del total de compras de clientes ordenado DESC")
     @GetMapping(value = "/totalCompras", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<totalComprasPorClienteDTO> totalCompras(){
+    public List<totalComprasPorClienteDTO> totalPurchase(){
         return this.cs.reporteTotalCompras();
     }
+
+
     @Operation (summary = "Guarda un Cliente")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Cliente agregado",
@@ -75,7 +76,7 @@ public class ClientController {
             @ApiResponse(responseCode = "406", description = "Cliente no agregado",
                     content = @Content) })
     @PostMapping("/add")
-    public ResponseEntity<?> postCliente(@RequestBody Client c) {
+    public ResponseEntity<?> postClient(@RequestBody Client c) {
         if (this.cs.save(c))
             return new ResponseEntity<>(HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
@@ -85,10 +86,14 @@ public class ClientController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Cliente eliminado",
                     content = { @Content}),
-             })
+            @ApiResponse(responseCode = "406", description = "Cliente no Existe",
+            content = @Content) })
     @DeleteMapping("/deleteByID/{id}")
-    public ResponseEntity<?> deleteBook(@PathVariable(value = "id") Long id) {
-        //TODO verificar que exista id ticket
+    public ResponseEntity<?> deleteClient(@PathVariable(value = "id") Long id) {
+        Optional<Client> client = this.cs.findClient(id);
+        if (client.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
         this.cs.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -100,13 +105,13 @@ public class ClientController {
             @ApiResponse(responseCode = "406", description = "Cliente no actualizado",
                     content = @Content) })
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateCliente(@RequestBody Client c, @PathVariable Long id) {
+    public ResponseEntity<?> updateClient(@RequestBody Client c, @PathVariable Long id) {
         Optional<Client> client = this.cs.findClient(id);
-        if(client != null){
+        if(!client.isEmpty()){
+            c.setIdClient(id);
             if (this.cs.save(c))
                 return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
-
 }
