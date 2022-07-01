@@ -1,13 +1,18 @@
 package com.example.arquitecturaweb_tp5.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Calendar;
 import java.util.List;
 
-import com.example.arquitecturaweb_tp5.dto.ticketDto;
+import com.example.arquitecturaweb_tp5.dto.ticketCompraDto;
 import com.example.arquitecturaweb_tp5.model.TicketDetails;
 import com.example.arquitecturaweb_tp5.servicios.ProductService;
 import com.example.arquitecturaweb_tp5.servicios.TicketDetailsService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,16 +36,24 @@ public class TicketController {
 
     private  List<TicketDetails> lista = new ArrayList<TicketDetails>();
 
+    @Operation(summary = "Retorna todos los Ticket")
     @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Ticket> allTickets() {
         return ts.listSold();
     }
 
+    @Operation (summary = "Guarda un Ticket y sus TicketDetails")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ticket agregado",
+                    content = { @Content}),
+            @ApiResponse(responseCode = "406", description = "Ticket no agregado",
+                    content = @Content) })
     @PostMapping(value="/add", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> saveTicket(@RequestBody ticketDto tdto)  {
+    public ResponseEntity<?> saveTicket(@RequestBody ticketCompraDto tdto)  {
 
-        this.lista=tdto.getTiketDetails();
+        this.lista=tdto.getTicketDetails();
+        Ticket save = new Ticket();
         boolean correct = true;
         Long idTicket = null;
 
@@ -51,16 +64,19 @@ public class TicketController {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         }
+
         //Nota: si esta todo ok con los productos genero el ticket
+        save =tdto.getTicket();
+        String  date = now();
+        save.setDate(date);//pone la fecha actuar
+        Ticket nuevo = this.ts.save(save);
 
-        if (this.ts.save(tdto.getTicket())){
-            Long idCliente = tdto.getTicket().getIdClient();
-            String date = tdto.getTicket().getDate();
-
-            idTicket = this.ts.idTicket(idCliente,date);//aca se rompe
-
+        if (nuevo!=null){
+            Long idClient = nuevo.getIdClient();
+            idTicket = nuevo.getIdTicket();//aca se rompe
             //idTicket = this.getIdTicket(tdto.getTicket().getIdClient(),tdto.getTicket().getDate());
         }
+
         for(TicketDetails tds : lista ){
             tds.setIdTicket(idTicket);
             this.tds.save(tds);
@@ -68,6 +84,7 @@ public class TicketController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 
     /*
     @PostMapping("/add")
@@ -79,29 +96,50 @@ public class TicketController {
         return null;
     }*/
 
+    public  String now() {
+        String DATE_FORMAT_NOW = "yyyy-MM-dd HH:mm:ss";
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
+        return sdf.format(cal.getTime());
+    }
+
+    @Operation(summary = "Retorna un idTicket segun el idClient y la fecha")
     @GetMapping("/getTicketById/cliente/{id}/date/{date}")
     public Long getIdTicket(@PathVariable(value = "id") Long id, @PathVariable(value = "date") String date) {
         Long idTicket = this.ts.idTicket(id,date);
         return idTicket;
     }
 
-    @GetMapping("/getTicketById/ticket/{date}")
-    public List<Ticket> getTicketDate(@PathVariable(value = "date") String date) {
-        List<Ticket> ticketDate = this.ts.getTicketDate(date);
+    @Operation(summary = "Retorna todos los Ticket de una fecha")
+    @GetMapping(value = "/date/{date}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Ticket> getTicketDate(@PathVariable(value = "date") String d) {
+        List<Ticket> ticketDate = this.ts.getTicketDate(d);
         return ticketDate;
     }
 
+    @Operation (summary = "Borra un Ticket")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ticket eliminado",
+                    content = { @Content}),
+    })
     @DeleteMapping("/deleteByID/{id}")
     public ResponseEntity<?> deleteBook(@PathVariable(value = "id") Long id) {
         this.ts.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @Operation (summary = "Actualiza un Ticket")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ticket actualizado",
+                    content = { @Content}),
+            @ApiResponse(responseCode = "406", description = "Ticket no actualizado",
+                    content = @Content) })
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateProduct(@RequestBody Ticket p, @PathVariable Long id) {
         Long ticket = this.ts.idTicket(id, p.getDate());
         if(ticket != null){
-            if (this.ts.save(p))
+            Ticket save = this.ts.save(p);
+            if (save!=null)
                 return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);

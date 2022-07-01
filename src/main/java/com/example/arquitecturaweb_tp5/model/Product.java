@@ -16,6 +16,7 @@ public class Product {
     private String description;
     private String price;
 
+
     public String getName() {
         return name;
     }

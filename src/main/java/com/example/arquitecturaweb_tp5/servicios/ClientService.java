@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,18 +39,33 @@ public class ClientService {
         this.client.saveAndFlush(c);
         return true;
     };
+
+    /**
+     * Elimina un Client segun id
+     * @param id
+     */
     @Transactional
     public void delete(Long id) {
         this.client.deleteById(id);
     }
 
+    /**
+     * Retorna un Client segun id
+     * @param id
+     * @return
+     */
     @Transactional(readOnly = true)
     public Optional<Client> findClient(Long id) {
         return this.client.findById(id);
     }
 
+    /**
+     * Retorna una lista de totalComprasPorClienteDTO
+     * @return
+     */
     @Transactional(readOnly = true)
-    public List<Object> reporteTotalCompras() {
+    public List<totalComprasPorClienteDTO> reporteTotalCompras() {
+
         return client.reporteTotales();
     }
 }
