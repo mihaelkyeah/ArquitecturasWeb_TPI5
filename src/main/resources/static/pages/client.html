@@ -1,1 +1,43 @@
 <h1>clients</h1>
+<form id="add-client" name="add-client" method="POST">
+    <input type="text" id="client-name" name="client-name" placeholder="Enter name"></input>
+    <input type="text" id="client-lastName" name="client-lastName" placeholder="Enter last name"></input>
+    <input type="email" id="client-email" name="client-email" placeholder="Enter email address"></input>
+    <input type="submit" id="client-submit" value="Add client"></input>
+</form>
+<!-- Lista de clientes -->
+<table class="table" id="client-table">
+    <thead>
+        <tr>
+            <th scope="col">Email</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Name</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Name</td>
+            <td>Last Name</td>
+            <td>email@email.com</td>
+            <td><button class="btn btn-warning client-table-edit" data-client-id="">Edit</button></td>
+            <td><button class="btn btn-danger client-table-delete" data-client-id="">Delete</button></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>Last Name</td>
+            <td>email@email.com</td>
+            <td><button class="btn btn-warning client-table-edit" data-client-id="">Edit</button></td>
+            <td><button class="btn btn-danger client-table-delete" data-client-id="">Delete</button></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>Last Name</td>
+            <td>email@email.com</td>
+            <td><button class="btn btn-warning client-table-edit" data-client-id="">Edit</button></td>
+            <td><button class="btn btn-danger client-table-delete" data-client-id="">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+<script type="text/javascript" th:src="@{/js/client.js}" ></script>

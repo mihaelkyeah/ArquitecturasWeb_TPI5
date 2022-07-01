@@ -1,34 +1,49 @@
-
-
-
-
-
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
+<form id="add-product" name="add-product" method="POST" action="">
+  <input type="text" id="product-name" name="product-name"></input>
+  <input type="text" id="product-description" name="product-description"></input>
+  <input type="text" id="product-price" name="product-price"></input>
+  <input type="submit" id="product-submit" value="Add product"></input>
+</form>
+<!-- Producto mejor vendido -->
+<div id="product-best-sold">
+</div>
+<!-- lista de productos -->
+<table class="table" id="product-table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Price</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Product 1</td>
+      <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi, sit rem dolorem voluptatem animi illum eveniet illo quae. Sapiente, rerum.</td>
+      <td>$999</td>
+      <td><button class="btn btn-warning product-table-edit" data-product-id="">Edit</button></td>
+      <td><button class="btn btn-danger product-table-delete" data-product-id="">Delete</button></td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Product 2</td>
+      <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi, sit rem dolorem voluptatem animi illum eveniet illo quae. Sapiente, rerum.</td>
+      <td>$999</td>
+      <td><button class="btn btn-warning product-table-edit" data-product-id="">Edit</button></td>
+      <td><button class="btn btn-danger product-table-delete" data-product-id="">Delete</button></td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Product 3</td>
+      <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi, sit rem dolorem voluptatem animi illum eveniet illo quae. Sapiente, rerum.</td>
+      <td>$999</td>
+      <td><button class="btn btn-warning product-table-edit" data-product-id="">Edit</button></td>
+      <td><button class="btn btn-danger product-table-delete" data-product-id="">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
+<script th:src="@{/js/product.js}" type="text/javascript"></script>
