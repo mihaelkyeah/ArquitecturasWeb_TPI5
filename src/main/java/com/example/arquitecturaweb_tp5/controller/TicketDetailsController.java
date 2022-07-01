@@ -52,7 +52,7 @@ public class TicketDetailsController {
 
     @DeleteMapping("/deleteByIdTicket/{id}")
     public ResponseEntity<?> deleteAllByIdTicket(@PathVariable(value = "id") Long id) {
-       //TODO verificar que exista id ticket
+
         this.tds.deleteByIdTicket(id);
             return new ResponseEntity<>(HttpStatus.OK);
         //TODO else  return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);

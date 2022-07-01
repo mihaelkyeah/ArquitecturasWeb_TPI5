@@ -1,5 +1,7 @@
 package com.example.arquitecturaweb_tp5.servicios;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,4 +76,17 @@ public class TicketService {
     @Transactional(readOnly = true)
     public List<Ticket> getTicketDate(String date) {return this.tr.getTicketDate(date);}
 
+
+    public  String nowExact() {
+        String DATE_FORMAT_NOW = "yyyy-MM-dd";
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
+        return sdf.format(cal.getTime());
+    }
+    public  String nowDate() {
+        String DATE_FORMAT_NOW = "yyyy-MM-dd HH:mm:ss";
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
+        return sdf.format(cal.getTime());
+    }
 }
