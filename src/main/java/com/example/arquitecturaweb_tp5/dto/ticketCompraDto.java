@@ -7,6 +7,9 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 
+/***
+ * DTO que contiene un ticket y sus detalles
+ */
 @Data
 public class ticketCompraDto {
 

@@ -2,6 +2,9 @@ package com.example.arquitecturaweb_tp5.dto;
 
 import lombok.Data;
 
+/***
+ *  DTO de la clase producto, sin el atributo id
+ */
 @Data
 public class ProductDTO {
     private String name;

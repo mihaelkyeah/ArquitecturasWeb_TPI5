@@ -1,6 +1,10 @@
 package com.example.arquitecturaweb_tp5.dto;
 
 import lombok.Data;
+
+/***
+ * DTO de Cliente y el total de sus compras
+ */
 @Data
 public class totalComprasPorClienteDTO {
     String name;

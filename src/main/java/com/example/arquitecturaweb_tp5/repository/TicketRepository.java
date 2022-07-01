@@ -9,9 +9,20 @@ import java.util.List;
 
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
+    /**
+     * Devuelve un id de un Ticket por la fecha y el id del cliente
+     * @param idClient
+     * @param date
+     * @return
+     */
     @Query(value = "SELECT t.idTicket FROM Ticket t WHERE t.idClient = :idCliente AND t.date = :date", nativeQuery = true)
     public Long getSpecificTicket(@Param("idCliente") Long idClient, @Param("date") String date);
 
+    /**
+     * Devuelve una lista de Ticket de una fecha dada
+     * @param date
+     * @return
+     */
     @Query(value = "SELECT t FROM Ticket t WHERE t.date = :date")
     List<Ticket> getTicketDate(String date);
 }
