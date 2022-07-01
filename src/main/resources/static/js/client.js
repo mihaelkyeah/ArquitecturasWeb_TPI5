@@ -1,7 +1,7 @@
-const url = 'api/client';
+const url = 'http://localhost:8080/client';
 document.addEventListener('DOMContentLoaded', () => {
-  cargarTabla(url);
-  document.querySelector('#agregar').addEventListener('click', () => {
+    cargarTabla();
+  document.querySelector('#client-submit').addEventListener('click', () => {
     agregarServidor(armarElemento());
   });
 }); 
@@ -12,20 +12,21 @@ document.addEventListener('DOMContentLoaded', () => {
  * Obtiene los datos de la url y la carga en la tabla
  */
 function cargarTabla(){
-  fetch(url, {
+  fetch(url + "/all", {
       method: 'GET',
       mode: 'cors',
   })
   .then(function(respuesta){
       if(respuesta.ok) {
            return respuesta.json();
+
       }
       else {
           alert("Error");
       }
   })
   .then(function(elementos){
-      let tabla = document.getElementById("tabla");
+      let tabla = document.getElementById("client-table");
       while ((tabla.rows.length - 1) > 0)
       {
           tabla.deleteRow(-1);
@@ -46,7 +47,7 @@ function cargarTabla(){
  * Crea una nueva fila en la tabla
  */
 function cargar(elemento){
-    let tabla = document.getElementById("tabla");
+    let tabla = document.getElementById("client-table");
     let fila = tabla.insertRow(-1);
     //Editar por id de tabla
     let id = elemento.IdClient;
@@ -132,7 +133,7 @@ function borrarElemento(fila, id)
         })
         .then(function(respuesta){
             if(respuesta.ok) {
-                let tabla = document.getElementById("tabla");
+                let tabla = document.getElementById("client-table");
                 tabla.removeChild(fila);
             }
             else {
