@@ -57,8 +57,11 @@ function iniciarPagina() {
             const url = 'http://localhost:8080/client';
 
                 cargarTabla();
-                document.querySelector('#client-submit').addEventListener('click', () => {
-                    agregarServidor(armarElemento());
+                document.querySelector('#client-submit').addEventListener('click', (event) => {
+                    event.preventDefault();
+                    let elem = armarElemento();
+                    console.log(elem);
+                    agregarServidor(elem);
                 });
 
 
@@ -114,13 +117,13 @@ function iniciarPagina() {
                 console.log(elemento);
                 //Crea todos los elementos
                 for(var key in elemento){
-                    console.log(elemento[key]);
                     let cel = fila.insertCell(0);
-                    cel.innerHTML(elemento[key]);
+                    cel.innerHTML = elemento[key];
                     //fila.appendChild(document.createElement("td").text(elemento[key]));
                 }
                 //Crea el boton de editar
                 let btnEditar = document.createElement("button");
+
                 btnEditar.innerHTML = "Editar";
                 btnEditar.type = "button";
                 btnEditar.addEventListener('click', function(){editarElemento(fila, id);});
@@ -146,7 +149,9 @@ function iniciarPagina() {
             function armarElemento()
             {
                 let elemento = {
-                    //'Modelo' : Formulario
+                    "name": document.getElementById("client-name").value,
+                    "lastName": document.getElementById("client-lastName").value,
+                    "email": document.getElementById("client-email").value
                 }
                 return elemento;
             }
@@ -159,7 +164,8 @@ function iniciarPagina() {
 
             function agregarServidor (elemento){
                 // Escribe el objeto en el JSON del servidor
-                fetch((url), {
+                console.log(elemento);
+                fetch((url + "/add"), {
                     'method': 'POST',
                     'headers': {
                         'content-type': 'application/JSON'
@@ -189,7 +195,7 @@ function iniciarPagina() {
             {
                 if (confirm("¿Seguro que desea eliminarlo?"))
                 {
-                    fetch((url+ '/' +id),{
+                    fetch((url + '/deleteByID/' +id),{
                         'method':'DELETE',
                         'mode': 'cors'
                     })
@@ -212,7 +218,8 @@ function iniciarPagina() {
                 //Crea el pedido los valores de la fila alterada
                 let elemento = leerFila(fila);
                 //Encuentra el pedido por su ID y lo pisa con los datos nuevos
-                fetch((url+ '/' +id),{
+                console.log(elemento);
+                fetch((url+ '/update/' +id),{
                     'method':'PUT',
                     'mode': 'cors',
                     'headers': {
@@ -238,9 +245,11 @@ function iniciarPagina() {
             {
                 //Deja de poder se editable
                 let  children = Array.from(document.getElementById(fila.id).children);
+                let i = 0;
                 children.forEach(child => {
-                    if (child.nodeType !== "BUTTON")
-                    {child.contentEditable = "false";}
+                    if (child.tagName !== "BUTTON")
+                    {child.contentEditable = "false";
+                    i++;}
                 });
                 //Verifica si esta todo bien
                 if (cambioValido())
@@ -261,7 +270,7 @@ function iniciarPagina() {
                 btnEditar.innerHTML = "Editar";
                 btnEditar.type = "button";
                 btnEditar.addEventListener('click', function(){editarPedido(fila, id);});
-                fila.replaceChild(btnEditar,fila.children[i+1]);
+                fila.replaceChild(btnEditar,fila.children[i]);
 
             }
 
@@ -272,8 +281,10 @@ function iniciarPagina() {
                 let valoresAnteriores  = [];
                 let  children = Array.from(document.getElementById(fila.id).children);
                 let i = 0;
+
                 children.forEach(child => {
-                    if (child.nodeType !== "BUTTON")
+                    console.log(child);
+                    if (child.tagName !== "BUTTON")
                     {
                         valoresAnteriores[i]= child.innerHTML;
                         child.contentEditable = "true";
@@ -284,14 +295,14 @@ function iniciarPagina() {
                 btnGuardar.innerHTML = "Guardar";
                 btnGuardar.type = "button";
                 btnGuardar.addEventListener('click', function(){guardarCambios(fila, valoresAnteriores, id);});
-                fila.replaceChild(btnGuardar,fila.children[i+1]);
+                fila.replaceChild(btnGuardar,fila.children[i]);
             }
 
             function volverValoresAnteriores(fila, valoresAnteriores){
                 let  children = Array.from(document.getElementById(fila.id).children);
                 let i = 0;
                 children.forEach(child => {
-                    if (child.nodeType !== "BUTTON")
+                    if (child.tagName !== "BUTTON")
                     {
                         child.innerHTML = valoresAnteriores[i];
                         i++;
@@ -306,7 +317,9 @@ function iniciarPagina() {
 
             function leerFila(fila){
                 let elemento = {
-                    //'Modelo' : fila.modelo
+                    "name": fila.children[2].innerHTML,
+                    "lastName": fila.children[1].innerHTML,
+                    "email": fila.children[0].innerHTML
                 }
                 return elemento;
             }
