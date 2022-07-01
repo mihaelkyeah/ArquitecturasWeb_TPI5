@@ -20,11 +20,20 @@ public class ProductService {
         super();
     }
 
+    /**
+     * Retorna la lista de Product
+     * @return
+     */
     @Transactional(readOnly = true)
     public List<Product> listProducts() {
         return this.product.findAll();
     }
 
+    /**
+     * Persiste un Product
+     * @param p
+     * @return T/F si el Product fue persistido
+     */
     @Transactional
     public Boolean save(Product p) {
         if (this.product.getByName(p.getName()) != null)
@@ -33,15 +42,29 @@ public class ProductService {
         return true;
     }
 
+    /**
+     * Elimina un Product segun el id
+     * @param id
+     */
     @Transactional
     public void delete(Long id) {
         this.product.deleteById(id);
     }
 
+    /**
+     * Retorna un Product segun el id
+     * @param id
+     * @return
+     */
     @Transactional(readOnly = true)
     public Optional<Product> findProduct(Long id) {
         return this.product.findById(id);
     }
+
+    /**
+     * Retorna el ProductDTO del Product mas vendido
+     * @return
+     */
     @Transactional(readOnly = true)
     public ProductDTO masVendido() {
         ProductDTO p = this.product.masVendido().get(0);

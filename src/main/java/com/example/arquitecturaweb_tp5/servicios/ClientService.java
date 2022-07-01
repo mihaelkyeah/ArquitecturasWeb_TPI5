@@ -39,16 +39,30 @@ public class ClientService {
         this.client.saveAndFlush(c);
         return true;
     };
+
+    /**
+     * Elimina un Client segun id
+     * @param id
+     */
     @Transactional
     public void delete(Long id) {
         this.client.deleteById(id);
     }
 
+    /**
+     * Retorna un Client segun id
+     * @param id
+     * @return
+     */
     @Transactional(readOnly = true)
     public Optional<Client> findClient(Long id) {
         return this.client.findById(id);
     }
 
+    /**
+     * Retorna una lista de totalComprasPorClienteDTO
+     * @return
+     */
     @Transactional(readOnly = true)
     public List<totalComprasPorClienteDTO> reporteTotalCompras() {
 

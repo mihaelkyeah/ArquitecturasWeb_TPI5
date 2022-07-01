@@ -22,17 +22,31 @@ public class TicketDetailsService {
         return this.td.findAll();
     }
 
+    /**
+     * Persiste un TicketDetails
+     * @param i
+     * @return
+     */
     @Transactional
     public Boolean save(TicketDetails i) {
         this.td.saveAndFlush(i);
         return true;
     }
 
+    /**
+     * Elimina los TicketDetails asociados a un idTicket
+     * @param id
+     */
     @Transactional
     public void deleteByIdTicket(Long id) {
          this.td.deleteAllByIdTicket(id);
     }
 
+    /**
+     * Retorna un TicketDetails por id
+     * @param id
+     * @return
+     */
     @Transactional(readOnly = true)
     public Optional<TicketDetails> findTicketDetail(Long id) {
         return this.td.findById(id);
