@@ -1,7 +1,7 @@
 "use strict";
 class client extends metodosComunes{
     constructor() {
-		super("client","client-table");
+		super("client","client-report-table");
 	}
 
 ////// SUPER /////
@@ -41,6 +41,26 @@ borrarId(elemento)
         "email": fila.children[0].innerHTML
     }
     return elemento;
+}
+
+cargarComprasCliente(){
+    fetch(this.url + "/totalCompras", {
+        method: 'GET',
+        mode: 'cors',
+   })
+   .then( respuesta =>{ 
+       if (respuesta.status == 200)
+       {
+            
+           return respuesta.json();
+           
+       }else{
+           alert("Error");
+       }
+   })
+    .catch(function(error) {
+        console.log("Hubo un problema con la petición Fetch:" + error.message);
+    });
 }
 
 iniciarPagina() {

@@ -5,7 +5,9 @@
 const url_inicio = '../pages/home.html';
 const url_productos = '../pages/product.html';
 const url_client = '../pages/client.html';
+const url_clientReporte = '../pages/clientReporte.html';
 const url_ticket = '../pages/ticket.html';
+const url_ticketReporte = '../pages/ticketReporte.html';
 let jsPagina;
 
 document.getElementById("pag1").addEventListener('click', (e) => {
@@ -23,6 +25,15 @@ document.getElementById("pag3").addEventListener('click', (e) => {
 document.getElementById("pag4").addEventListener('click', (e) => {
     e.preventDefault();
     cargar_pagina(url_ticket);
+});
+document.getElementById("pag5").addEventListener('click', (e) => {
+    e.preventDefault();
+    cargar_pagina(url_clientReporte);
+});
+
+document.getElementById("pag6").addEventListener('click', (e) => {
+    e.preventDefault();
+    cargar_pagina(url_ticketReporte);
 });
 
 function linkLoadCVS() {
@@ -69,7 +80,13 @@ function cargar_pagina(pagina) {
             case url_ticket:
                 ticket_pagina();
                 break;
-
+            case url_clientReporte:
+                jsPagina = new metodosReporte("client/totalCompras","client-report-table");
+                jsPagina.iniciarPagina();
+                break;
+            case url_ticketReporte:
+                jsPagina = new metodosReporte("ticket/date","ticket-report-table");
+            break;
         }
     }).catch((error) => {
         console.log(error);
