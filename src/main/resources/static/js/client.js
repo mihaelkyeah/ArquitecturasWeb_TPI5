@@ -1,7 +1,7 @@
 "use strict";
 class client extends metodosComunes{
     constructor() {
-		super("client","client-report-table");
+		super("client","client-table");
 	}
 
 ////// SUPER /////
