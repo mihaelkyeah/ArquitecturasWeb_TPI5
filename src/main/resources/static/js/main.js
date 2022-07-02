@@ -6,9 +6,6 @@ const url_inicio = '../pages/home.html';
 const url_productos = '../pages/product.html';
 const url_client = '../pages/client.html';
 const url_ticket = '../pages/ticket.html';
-
-let url = "";
-let tabla;
 let jsPagina;
 
 document.getElementById("pag1").addEventListener('click', (e) => {
@@ -66,7 +63,8 @@ function cargar_pagina(pagina) {
                 jsPagina.iniciarPagina();
                 break;
             case url_productos:
-                product_pagina();
+                jsPagina = new product();
+                jsPagina.iniciarPagina();
                 break;
             case url_ticket:
                 ticket_pagina();
@@ -77,30 +75,6 @@ function cargar_pagina(pagina) {
         console.log(error);
     });
 }
-
-/*
-function client_pagina() {
-    url = 'http://localhost:8080/client';
-    tabla =document.getElementById("client-table");
-    cargarTabla();
-    document.querySelector('#client-submit').addEventListener('click', (event) => {
-        event.preventDefault();
-        agregarServidor();
-    });
-
-}
-
-function product_pagina() {
-    url = 'http://localhost:8080/product';
-    tabla = document.getElementById("product-table");
-    cargarTabla();
-    document.querySelector('#product-submit').addEventListener('click', (event) => {
-        event.preventDefault();
-        agregarServidor();
-    });
-}
-    */
-
 
 function ticket_pagina() {
     url = 'http://localhost:8080/ticket';

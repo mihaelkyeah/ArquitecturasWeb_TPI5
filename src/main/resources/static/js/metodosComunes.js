@@ -7,12 +7,10 @@
  */
 class metodosComunes{
     constructor(url,tabla) {
-
 		this.url = "http://localhost:8080/"+url;
 		this.tabla = document.getElementById(tabla);
 	}
 
-    getTabla(){return this.tabla;}
     agregarServidor (elemento){
     fetch((this.url + "/add"), {
         'method': 'POST',
@@ -22,8 +20,8 @@ class metodosComunes{
         'mode': 'cors',
         'body': JSON.stringify(elemento)
     })
-    .then(function (respuesta) {
-        if (respuesta.ok) {
+    .then(respuesta =>{ 
+        if (respuesta.status == 200) {
             this.cargarTabla();
         }
         else {
@@ -40,12 +38,10 @@ class metodosComunes{
 * Crea una nueva fila en la tabla
 */
 cargar(elemento){
-    console.log("cargando");
-    let t = this.getTabla();
-    let fila = t.insertRow(-1);
+    if ((elemento) === null) {return;}
+    let fila = this.tabla.insertRow(-1);
     //Editar por id de tabla
     let id = this.borrarId(elemento)
-    console.log(elemento);
     //Crea todos los elementos
     for(var key in elemento){
         let cel = fila.insertCell(0);
@@ -57,7 +53,7 @@ cargar(elemento){
     btnEditar.innerHTML = "Editar";
     btnEditar.type = "button";
 
-    btnEditar.addEventListener('click', function(){
+    btnEditar.addEventListener('click', e => { 
         this.editarElemento(fila, id);
     });
     celEditar.appendChild(btnEditar);
@@ -68,13 +64,13 @@ cargar(elemento){
     let btnBorrar = document.createElement("button");
     btnBorrar.innerHTML = "Borrar";
     btnBorrar.type = "button";
-    btnBorrar.addEventListener('click', function(){
+    btnBorrar.addEventListener('click', e => { 
         this.borrarElemento(fila, id);
     });
     celBorrar.appendChild(btnBorrar);
     fila.appendChild(celBorrar);
     // Agrega la fila a la tabla
-    t.appendChild(fila);
+    this.tabla.appendChild(fila);
 }
 
 /**
@@ -82,29 +78,28 @@ cargar(elemento){
  * Obtiene los datos de la url y manda a cargar la tabla
  */
  cargarTabla(){
-    let t = this.getTabla();
      fetch(this.url + "/all", {
          method: 'GET',
          mode: 'cors',
-     })
-     .then(function(respuesta){
-         if(respuesta.ok) {
-             return respuesta.json();
- 
-         }
-         else {
-             alert("Error");
-         }
-     })
-     .then(function(elementos){
-         while ((t.rows.length - 1) > 0)
-         {
-             t.deleteRow(-1);
-         }
-         elementos.forEach(e => {
-            this.cargar(e.bind(e));
+    })
+    .then( respuesta =>{ 
+        if (respuesta.status == 200)
+        {
+            return respuesta.json();
+            
+        }else{
+            alert("Error");
+        }
+    })
+    .then(elementos =>{
+        while ((this.tabla.rows.length - 1) > 0)
+        {
+            this.tabla.deleteRow(-1);
+        }
+        elementos.forEach(e => {
+            this.cargar(e);
         });
-     })
+    })
      .catch(function(error) {
          console.log("Hubo un problema con la petición Fetch:" + error.message);
      });
@@ -112,21 +107,22 @@ cargar(elemento){
 
  regresarAnteriores(fila, valoresAnteriores){
     let children = Array.from(fila.children);
+    let c = this.tabla.rows[0].cells.length;
     let i = 0;
     children.forEach(child => {
-        if (child.tagName !== "BUTTON")
+        if ((i+2) < c)
         {
             child.innerHTML = valoresAnteriores[i];
             i++;
         }
     });
 }
-//Esta funcion edita un pedido del servidor, de no poder hacerlo restaura los valores viejos en la tabla
- editarServidor(fila, id, valoresAnteriores)
+//Esta funcion edita un elemento del servidor, de no poder hacerlo restaura los valores viejos en la tabla
+  editarServidor(fila, id, valoresAnteriores)
 {
-    //Crea el pedido los valores de la fila alterada
+    //Crea el elemento los valores de la fila alterada
     let elemento = this.leerFila(fila);
-    //Encuentra el pedido por su ID y lo pisa con los datos nuevos
+    //Encuentra el elemento por su ID y lo pisa con los datos nuevos
     fetch((this.url+ '/update/' +id),{
         'method':'PUT',
         'mode': 'cors',
@@ -135,17 +131,20 @@ cargar(elemento){
         },
         'body': JSON.stringify(elemento)
     })
-    .then(function(respuesta){
-        if(!respuesta.ok) {
-            //Si falla el PUT restaura los valores anteriores en la tabla
-            this.regresarAnteriores(fila, valoresAnteriores)
-            alert("No se pudo modificar el pedido");
-        }
-        else {
+    .then(respuesta =>{ 
+        if(respuesta.status == 200) {
             //Si funciona el PUT
             alert("Datos modificados");
         }
-    })
+        else {
+            //Si falla el PUT restaura los valores anteriores en la tabla
+            this.regresarAnteriores(fila, valoresAnteriores)
+            alert("No se pudo modificar el elemento");
+        }
+    }) 
+    .catch(function(error) {
+        console.log("Hubo un problema con la petición Fetch:" + error.message);
+    });
 }
 
 //Esta funcion deja de permitir la edicion de la tabla y que cambios ocurren
@@ -155,7 +154,7 @@ cargar(elemento){
     let children = Array.from(fila.children);
     let i = 0;
     children.forEach(child => {
-        if (child.tagName !== "BUTTON")
+        if (child.contentEditable == "true")
         {child.contentEditable = "false";
         i++;}
     });
@@ -177,7 +176,7 @@ cargar(elemento){
     let btnEditar = document.createElement("button");
     btnEditar.innerHTML = "Editar";
     btnEditar.type = "button";
-    btnEditar.addEventListener('click', function(){this.editarPedido(fila, id);});
+    btnEditar.addEventListener('click', e => { this.editarElemento(fila, id);});
     fila.replaceChild(btnEditar,fila.children[i]);
 }
 
@@ -187,9 +186,10 @@ cargar(elemento){
     //Se guardan los valores viejos y las celdas se vuelven editables
     let valoresAnteriores  = [];
     let children = Array.from(fila.children);
+    let c = this.tabla.rows[0].cells.length;
     let i = 0;
     children.forEach(child => {
-        if (child.tagName !== "BUTTON")
+        if ((i+2) < c)
         {
             valoresAnteriores[i]= child.innerHTML;
             child.contentEditable = "true";
@@ -199,8 +199,8 @@ cargar(elemento){
     let btnGuardar = document.createElement("button");
     btnGuardar.innerHTML = "Guardar";
     btnGuardar.type = "button";
-    btnGuardar.addEventListener('click', function(){this.guardarCambios(fila, valoresAnteriores, id);});
-    fila.replaceChild(btnGuardar,fila.children[i]);
+    btnGuardar.addEventListener('click', e => { this.guardarCambios(fila, valoresAnteriores, id);});
+    fila.replaceChild(btnGuardar,fila.children[c-2]);
 }
 
 /**
@@ -208,18 +208,17 @@ cargar(elemento){
  * @param {fila, id}
  * Elimina un elemento del servidor y de la tabla en el html
  */
-    borrarElemento(fila, id)
+  borrarElemento(fila, id)
     {
-        let t = this.getTabla();
         if (confirm("¿Seguro que desea eliminarlo?"))
         {
             fetch((this.url + '/deleteByID/' +id),{
                 'method':'DELETE',
                 'mode': 'cors'
             })
-            .then(function(respuesta){
-                if(respuesta.ok) {
-                    t.removeChild(fila);
+            .then(respuesta =>{ 
+                if(respuesta.status == 200) {
+                    this.tabla.removeChild(fila);
                 }
                 else {
                     alert("No se pudo eliminar");
