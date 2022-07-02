@@ -15,6 +15,11 @@ borrarId(elemento)
     return id;
 }
 
+addId(elemento,id)
+    {     
+        elemento.idClient=id;
+    }
+
 /**
  * @returns elemento JSON
  * Devuelve un json cargados con los valores leidos del formulario
