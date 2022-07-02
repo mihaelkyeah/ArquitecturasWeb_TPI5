@@ -1,0 +1,60 @@
+<h1>Ticket</h1>
+<!-- Traer un ticket para ver los detalles -->
+<div class="d-flex flex-row justify-content-center align-items-center my-3">
+  <select name="select-ticket" id="select-ticket">
+    <option selected disabled value="">Select ticket</option>
+  </select>
+</div>
+<!-- Agregar detalle a un ticket -->
+<form class="d-flex flex-row justify-content-center gap-1em" method="POST" action="" id="form-cart" name="form-cart">
+  <label for="ticketdetail-client">Select client</label>
+  <select name="ticketdetail-client" id="ticketdetail-client">
+    <option selected disabled value="">Select client</option>
+  </select>
+  <label for="ticketdetail-product">Select product</label>
+  <select name="ticketdetail-product" id="ticketdetail-product">
+    <option selected disabled value="">Select product</option>
+  </select>
+  <label for="ticketdetail-product-qty">Product quantity</label>
+  <input type="number" name="ticketdetail-product-qty" id="ticketdetail-product-qty" min="1" max="3" step="1"></input>
+  <input type="submit" value="Add detail to ticket"></input>
+</form>
+<!-- Ticket actual (traido o en edición) -->
+<table class="table" id="ticketdetail-table">
+  <thead>
+    <tr>
+      <th scope="col">Client</th>
+      <th scope="col">Product</th>
+      <th scope="col">Qty</th>
+      <th scope="col">Remove</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">#1</th>
+      <td>Client name</td>
+      <td>Product name</td>
+      <td>1</td>
+      <td><button class="btn btn-danger table-ticketdetail-delete"><strong>x</strong></button></td>
+    </tr>
+    <tr>
+      <th scope="row">#2</th>
+      <td>Client name</td>
+      <td>Product name</td>
+      <td>3</td>
+      <td><button class="btn btn-danger table-ticketdetail-delete"><strong>x</strong></button></td>
+    </tr>
+    <tr>
+      <th scope="row">#3</th>
+      <td>Client name</td>
+      <td>Product name</td>
+      <td>2</td>
+      <td><button class="btn btn-danger table-ticketdetail-delete"><strong>x</strong></button></td>
+    </tr>
+  </tbody>
+</table>
+<div id="ticket-button-group" class="d-flex flex-row justify-content-center align-items-center">
+  <button id="ticket-button-submit" class="btn btn-success">Submit ticket</button>
+  <button hidden id="ticket-button-delete" class="btn btn-danger">Delete ticket</button>
+</div>
+<script th:src="@{/js/cart.js}" type="text/javascript"></script>

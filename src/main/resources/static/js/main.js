@@ -5,7 +5,7 @@
 const url_inicio = '../pages/home.html';
 const url_productos = '../pages/product.html';
 const url_client = '../pages/client.html';
-const url_cart = '../pages/cart.html';
+const url_ticket = '../pages/ticket.html';
 
 let url = "";
 let tabla;
@@ -25,7 +25,7 @@ document.getElementById("pag3").addEventListener('click', (e) => {
 });
 document.getElementById("pag4").addEventListener('click', (e) => {
     e.preventDefault();
-    cargar_pagina(url_cart);
+    cargar_pagina(url_ticket);
 });
 
 function linkLoadCVS() {
@@ -68,8 +68,8 @@ function cargar_pagina(pagina) {
             case url_productos:
                 product_pagina();
                 break;
-            case url_cart:
-                cart_pagina();
+            case url_ticket:
+                ticket_pagina();
                 break;
 
         }
@@ -102,7 +102,7 @@ function product_pagina() {
     */
 
 
-function cart_pagina() {
+function ticket_pagina() {
     url = 'http://localhost:8080/ticket';
     tabla = document.getElementById("ticket-table");
     cargarTabla();
