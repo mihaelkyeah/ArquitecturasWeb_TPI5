@@ -81,8 +81,13 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public boolean buyLimit(Long idCliente, Long idProduct,String dateNow, int productLimit) {
-        if(this.tdr.getCountSoldStartsWith(idCliente,idProduct, dateNow) >= productLimit)
-            return true;
+
+        Float value = this.tdr.getCountSoldStartsWith(idCliente,idProduct, dateNow);
+
+        if(value != null){
+            if(value >= productLimit)
+                return true;
+        }
         return false;
     }
 }

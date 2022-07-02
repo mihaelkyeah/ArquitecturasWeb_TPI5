@@ -17,7 +17,7 @@ public class TicketDetails {
     private Long idTicketDetails;
     private Long idTicket;
     private Long idProduct;
-    private int quantity;
+    private float quantity;
     private float price;
 
     public Long getIdTicket() {
@@ -36,7 +36,7 @@ public class TicketDetails {
         this.idProduct = idProduct;
     }
 
-    public int getQuantity() {
+    public float getQuantity() {
         return quantity;
     }
 
