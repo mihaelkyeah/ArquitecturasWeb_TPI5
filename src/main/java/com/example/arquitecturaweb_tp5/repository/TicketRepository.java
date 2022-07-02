@@ -24,6 +24,6 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
      * @return
      */
     @Query(value = "SELECT t FROM Ticket t WHERE t.date = :date")
-    List<Ticket> getTicketDate(String date);
+    List<Ticket> getTicketDate( @Param("date") String date);
 
 }

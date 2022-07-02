@@ -76,13 +76,14 @@ public class TicketService {
     public List<Ticket> getTicketDate(String date) {return this.tr.getTicketDate(date);}
 
 
-    public  String nowExact() {
+
+    public  String nowDate() {
         String DATE_FORMAT_NOW = "yyyy-MM-dd";
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
         return sdf.format(cal.getTime());
     }
-    public  String nowDate() {
+    public  String nowDateSpecific() {
         String DATE_FORMAT_NOW = "yyyy-MM-dd HH:mm:ss";
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);

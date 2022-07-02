@@ -12,9 +12,9 @@ public interface TicketDetailsRepository extends JpaRepository<TicketDetails, Lo
      * @param id
      */
     @Query(value = "DELETE FROM TicketDetails td WHERE td.idTicket = :id")
-    public void deleteAllByIdTicket(Long id);
+    public void deleteAllByIdTicket( @Param("id") Long id);
 
-    @Query(value="SELECT SUM(td.quantity) FROM TicketDetails td JOIN Ticket t ON t.idTicket = td.idTicket WHERE t.idClient = :idClient AND td.idProduct = :idProduct AND t.date LIKE %:dateLike%")
-    Float getCountSoldStartsWith(@Param("idClient") Long idClient,@Param("idProduct") Long idProduct, @Param("dateLike") String dateLike);
+    @Query(value="SELECT COALESCE(SUM(td.quantity),0) FROM TicketDetails td JOIN Ticket t ON t.idTicket = td.idTicket WHERE t.idClient = :idClient AND td.idProduct = :idProduct AND t.date LIKE %:dateLike%")
+    float getCountSoldStartsWith(@Param("idClient") Long idClient,@Param("idProduct") Long idProduct, @Param("dateLike") String dateLike);
 
 }

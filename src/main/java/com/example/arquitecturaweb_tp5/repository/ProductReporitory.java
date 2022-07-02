@@ -27,4 +27,6 @@ public interface ProductReporitory extends JpaRepository<Product, Long> {
     @Query(value = "SELECT new com.example.arquitecturaweb_tp5.dto.ProductDTO(p.name,p.description,p.price) FROM Product p JOIN TicketDetails td ON p.idProduct = td.idProduct GROUP BY p.idProduct ORDER BY sum(td.quantity) DESC")
     public List<ProductDTO> masVendido();
 
+    @Query(value = "UPDATE Product AS p SET p.stock = :quantity WHERE p.id = :id")
+    void setStock( @Param("id") Long id, @Param("quantity") Float quantity);
 }

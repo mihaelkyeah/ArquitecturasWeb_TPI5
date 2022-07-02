@@ -2,10 +2,12 @@ package com.example.arquitecturaweb_tp5.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.example.arquitecturaweb_tp5.dto.ticketCompraDto;
+import com.example.arquitecturaweb_tp5.model.Client;
 import com.example.arquitecturaweb_tp5.model.TicketDetails;
-import com.example.arquitecturaweb_tp5.servicios.ProductService;
+import com.example.arquitecturaweb_tp5.servicios.ClientService;
 import com.example.arquitecturaweb_tp5.servicios.TicketDetailsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -26,18 +28,15 @@ public class TicketController {
 
     @Autowired
     private TicketService ts;
-
     @Autowired
     private TicketDetailsService tds;
-    @Autowired
-    private ProductService ps;
 
+    @Autowired
+    private ClientService cs;
     private  List<TicketDetails> lista = new ArrayList<TicketDetails>();
     private Ticket ticket = new Ticket();
-
     private Long idTicket;
 
-    private int productLimit;
 
     @Operation(summary = "Retorna todos los Ticket")
     @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -54,36 +53,33 @@ public class TicketController {
     @PostMapping(value="/add", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<?> saveTicket(@RequestBody ticketCompraDto tdto)  {
+        // Inicializaciones
         this.lista=tdto.getTicketDetails();
-        this.idTicket = null;
         this.ticket = tdto.getTicket();
-        boolean puedeComprar = false;
-
-        String dateNow = this.ts.nowExact();
-        String dateExact = this.ts.nowDate();
-
-        for (TicketDetails ts : this.lista ) {
-            if(ps.findProduct(ts.getIdProduct()).isEmpty())
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
-
-            puedeComprar = ps.buyLimit(ticket.getIdClient(),ts.getIdProduct(),dateNow, this.productLimit);
-
-
-            if(puedeComprar)
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        // ---------------------------------------------------------
+        if(!tds.allProductsValid(this.lista, ticket)) {
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
-        ticket.setDate(dateExact);//pone la fecha actuar
+        //----------------------------------------------------------
+
+        Optional<Client> client = this.cs.findClient(ticket.getIdClient());
+        if (client.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
+        ticket.setDate(this.ts.nowDateSpecific());//pone la fecha actual
         Ticket nuevo = this.ts.save(ticket);
         if (nuevo!=null){
             idTicket = nuevo.getIdTicket();
         }else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
+
+        //----------------------------------------------------------
         for(TicketDetails tds : lista ){
             tds.setIdTicket(idTicket);
             this.tds.save(tds);
-        }
+        }//----------------------------------------------------------
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

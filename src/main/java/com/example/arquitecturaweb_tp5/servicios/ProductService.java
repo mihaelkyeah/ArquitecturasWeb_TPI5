@@ -19,6 +19,8 @@ public class ProductService {
     @Autowired
     public TicketDetailsRepository tdr;
 
+    private int maxSoldProduct = 3;
+
     public ProductService() {
         super();
     }
@@ -75,20 +77,37 @@ public class ProductService {
         return p;
     }
 
+    /**
+     * Busca y Retorna un producto si existe segun su nombre
+     * @return
+     */
     @Transactional(readOnly = true)
     public Product existProduct(String name) {
         return this.pr.getByName(name);
     }
 
+    /**
+     * Retorna si es posible comprar esa cantidad de productos ese dia
+     * @return
+     */
     @Transactional(readOnly = true)
-    public boolean buyLimit(Long idCliente, Long idProduct,String dateNow, int productLimit) {
-
-        Float value = this.tdr.getCountSoldStartsWith(idCliente,idProduct, dateNow);
-
-        if(value != null){
-            if(value >= productLimit)
-                return true;
+    public boolean buyLimit(Long idCliente, Long idProduct,String dateNow, float quantityTicket) {
+        float value = this.tdr.getCountSoldStartsWith(idCliente,idProduct, dateNow);
+        value = value + quantityTicket;
+        if(value <= maxSoldProduct){
+            return true;
         }
         return false;
+    }
+
+    public void restarStock(Long idProduct, float quantity) {
+        Product p = this.pr.getById(idProduct);
+        p.setStock(p.getStock()-quantity);
+        this.pr.save(p);
+    }
+
+    public Float stockDisponible(Long idProduct) {
+        Product p = this.pr.getById(idProduct);
+        return p.getStock();
     }
 }
