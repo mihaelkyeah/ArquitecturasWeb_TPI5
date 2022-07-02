@@ -20,16 +20,19 @@ class product extends metodosComunes{
          let elemento = {
              "name": document.getElementById("product-name").value,
              "description": document.getElementById("product-description").value,
-             "price": document.getElementById("product-price").value
+             "price": document.getElementById("product-price").value,
+             "stock":document.getElementById("product-stock").value
          }
+         
          return elemento;
     }
 
     leerFila(fila){
     let elemento = {
-        "name": fila.children[0].innerHTML,
-        "description": fila.children[1].innerHTML,
-        "price": fila.children[2].innerHTML
+        "name": fila.children[1].innerHTML,
+        "description": fila.children[2].innerHTML,
+        "price": fila.children[3].innerHTML,
+        "stock": fila.children[0].innerHTML
     }
     return elemento;
 }
