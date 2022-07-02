@@ -41,8 +41,33 @@ cambioValido(){
 
     return true;
 }
+
+cargarMasVendido(){
+    fetch(this.url + "/mas-vendido", {
+        method: 'GET',
+        mode: 'cors',
+   })
+   .then( respuesta =>{ 
+       if (respuesta.status == 200)
+       {
+            
+           return respuesta.json();
+           
+       }else{
+           alert("Error");
+       }
+   })
+   .then(producto =>{
+        document.getElementById("product-best-sold").innerHTML= producto.name ;
+   })
+    .catch(function(error) {
+        console.log("Hubo un problema con la petición Fetch:" + error.message);
+    });
+}
+
 iniciarPagina() {
     this.cargarTabla();
+    this.cargarMasVendido();
     document.querySelector('#product-submit').addEventListener('click', (event) => {
         event.preventDefault();
         this.agregarServidor();
