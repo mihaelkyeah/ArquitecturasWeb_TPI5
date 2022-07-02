@@ -66,7 +66,7 @@ public class ProductController {
                     content = @Content) })
     @PostMapping("/add")
     public ResponseEntity<?> postProduct(@RequestBody Product p) {
-        if(this.ps.existProduct(p.getName()) != null){
+        if(this.ps.existProduct(p.getName()) == null){
             if (this.ps.save(p))
                 return new ResponseEntity<>(HttpStatus.OK);
         }

@@ -73,9 +73,10 @@ public class TicketService {
      * @return
      */
     @Transactional(readOnly = true)
-    public List<Ticket> getTicketDate(String date) {return this.tr.getTicketDate(date);}
-
-
+    public List<Ticket> getTicketDate(String date) {
+        date = "%" + date + "%";
+        return this.tr.getTicketDate(date);
+    }
 
     public  String nowDate() {
         String DATE_FORMAT_NOW = "yyyy-MM-dd";
