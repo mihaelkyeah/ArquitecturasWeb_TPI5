@@ -1,13 +1,12 @@
 package com.example.arquitecturaweb_tp5.servicios;
 
-import com.example.arquitecturaweb_tp5.dto.totalComprasPorClienteDTO;
+import com.example.arquitecturaweb_tp5.dto.TotalComprasPorClienteDTO;
 import com.example.arquitecturaweb_tp5.model.Client;
 import com.example.arquitecturaweb_tp5.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,7 +63,7 @@ public class ClientService {
      * @return
      */
     @Transactional(readOnly = true)
-    public List<totalComprasPorClienteDTO> reporteTotalCompras() {
+    public List<TotalComprasPorClienteDTO> reporteTotalCompras() {
 
         return client.reporteTotales();
     }

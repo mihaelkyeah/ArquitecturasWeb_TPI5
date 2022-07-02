@@ -11,12 +11,12 @@ import java.util.List;
  * DTO que contiene un ticket y sus detalles
  */
 @Data
-public class ticketCompraDto {
+public class TicketCompraDto {
 
     private List<TicketDetails> ticketDetails;
     private Ticket ticket;
 
-    public ticketCompraDto(List<TicketDetails> t, Ticket tik) {
+    public TicketCompraDto(List<TicketDetails> t, Ticket tik) {
         this.ticketDetails = new ArrayList<TicketDetails>();
         this.ticket = tik;
         this.ticketDetails = t;

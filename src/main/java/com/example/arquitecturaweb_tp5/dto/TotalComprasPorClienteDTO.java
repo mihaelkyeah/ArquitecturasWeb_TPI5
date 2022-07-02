@@ -6,12 +6,12 @@ import lombok.Data;
  * DTO de Cliente y el total de sus compras
  */
 @Data
-public class totalComprasPorClienteDTO {
+public class TotalComprasPorClienteDTO {
     String name;
     String lastName;
     double totalCompras;
 
-    public totalComprasPorClienteDTO(String name, String lastName, double totalCompras) {
+    public TotalComprasPorClienteDTO(String name, String lastName, double totalCompras) {
         this.name = name;
         this.lastName = lastName;
         this.totalCompras = totalCompras;

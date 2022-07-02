@@ -1,6 +1,6 @@
 package com.example.arquitecturaweb_tp5.repository;
 
-import com.example.arquitecturaweb_tp5.dto.totalComprasPorClienteDTO;
+import com.example.arquitecturaweb_tp5.dto.TotalComprasPorClienteDTO;
 import com.example.arquitecturaweb_tp5.model.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,6 +20,6 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
      * Devuelve una lista de totalComprasPorClienteDTO ordenados por el total de compras
      * @return
      */
-    @Query("SELECT new com.example.arquitecturaweb_tp5.dto.totalComprasPorClienteDTO(c.name, c.lastName, sum(t.total)) FROM Client c JOIN Ticket t ON c.IdClient = t.idClient GROUP BY c.name, c.lastName")
-    public List<totalComprasPorClienteDTO> reporteTotales();
+    @Query("SELECT new com.example.arquitecturaweb_tp5.dto.TotalComprasPorClienteDTO(c.name, c.lastName, sum(t.total)) FROM Client c JOIN Ticket t ON c.IdClient = t.idClient GROUP BY c.name, c.lastName")
+    public List<TotalComprasPorClienteDTO> reporteTotales();
 }

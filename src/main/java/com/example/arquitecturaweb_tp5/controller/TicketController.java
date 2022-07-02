@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.arquitecturaweb_tp5.dto.ticketCompraDto;
+import com.example.arquitecturaweb_tp5.dto.TicketCompraDto;
 import com.example.arquitecturaweb_tp5.model.Client;
 import com.example.arquitecturaweb_tp5.model.TicketDetails;
 import com.example.arquitecturaweb_tp5.servicios.ClientService;
@@ -52,7 +52,7 @@ public class TicketController {
                     content = @Content) })
     @PostMapping(value="/add", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> saveTicket(@RequestBody ticketCompraDto tdto)  {
+    public ResponseEntity<?> saveTicket(@RequestBody TicketCompraDto tdto)  {
         // Inicializaciones
         this.lista=tdto.getTicketDetails();
         this.ticket = tdto.getTicket();

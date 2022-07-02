@@ -1,5 +1,5 @@
 id,name,description,price,stock
-1,Carbonated Water - Cherry,"Bypass Cystic Duct to Left Hepatic Duct, Open Approach",13.75,2
+1,Carbonated Water - Cherry,"Bypass Cystic Duct to Left Hepatic Duct, Open Approach",13.75,4
 2,Transfer Sheets,"Imaging, Endocrine System, Magnetic Resonance Imaging (MRI)",69.08,4
 3,Hold Up Tool Storage Rack,"Division of R Low Extrem Bursa/Lig, Perc Endo Approach",70.43,8
 4,Spice - Onion Powder Granulated,"Replace R Ext Jugular Vein w Nonaut Sub, Perc Endo",63.66,7
@@ -9,7 +9,7 @@ id,name,description,price,stock
 8,Wine - Rubyport,"Fusion Cerv Jt w Autol Sub, Ant Appr A Col, Perc Endo",59.28,5
 9,Bacardi Limon,"Bypass Stomach to Jejunum with Synth Sub, Open Approach",99.52,1
 10,Pastry - French Mini Assorted,"Revision of Spacer in Coccygeal Joint, Open Approach",13.2,10
-11,Sole - Iqf,Fluoroscopy of Bi Up Extrem Art using H Osm Contrast,89.59,1
+11,Sole - Iqf,Fluoroscopy of Bi Up Extrem Art using H Osm Contrast,89.59,3
 12,Maple Syrup,"Excision of Duodenum, Endo, Diagn",24.69,8
 13,Evaporated Milk - Skim,"Destruction of Right Hand Bursa and Ligament, Perc Approach",78.98,7
 14,"Juice - Apple, 1.36l","Heart and Great Vessels, Map",75.61,2

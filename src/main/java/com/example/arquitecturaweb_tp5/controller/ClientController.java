@@ -1,5 +1,5 @@
 package com.example.arquitecturaweb_tp5.controller;
-import com.example.arquitecturaweb_tp5.dto.totalComprasPorClienteDTO;
+import com.example.arquitecturaweb_tp5.dto.TotalComprasPorClienteDTO;
 import com.example.arquitecturaweb_tp5.model.Client;
 import com.example.arquitecturaweb_tp5.servicios.ClientService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -64,7 +64,7 @@ public class ClientController {
 
     @Operation (summary = "Retorna un reporte del total de compras de clientes ordenado DESC")
     @GetMapping(value = "/totalCompras", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<totalComprasPorClienteDTO> totalPurchase(){
+    public List<TotalComprasPorClienteDTO> totalPurchase(){
         return this.cs.reporteTotalCompras();
     }
 
