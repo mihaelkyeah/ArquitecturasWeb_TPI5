@@ -58,12 +58,18 @@ public class TicketController {
         this.idTicket = null;
         this.ticket = tdto.getTicket();
         boolean puedeComprar = false;
+
         String dateExact = this.ts.nowExact();
         String dateNow = this.ts.nowDate();
+
         for (TicketDetails ts : this.lista ) {
             if(ps.findProduct(ts.getIdProduct()).isEmpty())
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+
             puedeComprar = ps.buyLimit(ticket.getIdClient(),ts.getIdProduct(),dateNow, this.productLimit);
+
+
             if(puedeComprar)
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
