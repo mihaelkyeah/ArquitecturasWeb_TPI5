@@ -4,6 +4,7 @@ import com.example.arquitecturaweb_tp5.dto.ProductDTO;
 import com.example.arquitecturaweb_tp5.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 

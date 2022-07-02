@@ -21,6 +21,17 @@ public class Ticket {
     private String date;
     private float total;
 
+    public Ticket(Long id_ticket, String date, Long id_client, Float total) {
+        this.idTicket = id_ticket;
+        this.date = date;
+        this.idClient = id_client;
+        this.total = total;
+    }
+
+    public Ticket() {
+
+    }
+
     public void setIdTicket(Long idTicket) {
         this.idTicket = idTicket;
     }
@@ -34,7 +45,7 @@ public class Ticket {
     }
 
     public String getDate() {
-        return date;
+        return this.date;
     }
 
     public void setDate(String date) {

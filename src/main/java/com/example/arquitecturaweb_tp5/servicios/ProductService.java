@@ -15,7 +15,7 @@ import java.util.Optional;
 public class ProductService {
 
     @Autowired
-    public ProductReporitory product;
+    public ProductReporitory pr;
     @Autowired
     public TicketDetailsRepository tdr;
 
@@ -29,7 +29,7 @@ public class ProductService {
      */
     @Transactional(readOnly = true)
     public List<Product> listProducts() {
-        return this.product.findAll();
+        return this.pr.findAll();
     }
 
     /**
@@ -39,9 +39,10 @@ public class ProductService {
      */
     @Transactional
     public Boolean save(Product p) {
-        if (this.product.getByName(p.getName()) != null)
+        if (this.pr.getByName(p.getName()) != null){
             return false;
-        this.product.saveAndFlush(p);
+        }
+        this.pr.saveAndFlush(p);
         return true;
     }
 
@@ -51,7 +52,7 @@ public class ProductService {
      */
     @Transactional
     public void delete(Long id) {
-        this.product.deleteById(id);
+        this.pr.deleteById(id);
     }
 
     /**
@@ -61,7 +62,7 @@ public class ProductService {
      */
     @Transactional(readOnly = true)
     public Optional<Product> findProduct(Long id) {
-        return this.product.findById(id);
+        return this.pr.findById(id);
     }
 
     /**
@@ -70,13 +71,13 @@ public class ProductService {
      */
     @Transactional(readOnly = true)
     public ProductDTO masVendido() {
-        ProductDTO p = this.product.masVendido().get(0);
+        ProductDTO p = this.pr.masVendido().get(0);
         return p;
     }
 
     @Transactional(readOnly = true)
     public Product existProduct(String name) {
-        return this.product.getByName(name);
+        return this.pr.getByName(name);
     }
 
     @Transactional(readOnly = true)

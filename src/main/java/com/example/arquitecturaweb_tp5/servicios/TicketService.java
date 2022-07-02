@@ -61,7 +61,6 @@ public class TicketService {
      * @param date
      * @return
      */
-
     @Transactional(readOnly = true)
     public Long idTicket(Long id, String date) {
         return  this.tr.getSpecificTicket(id, date);

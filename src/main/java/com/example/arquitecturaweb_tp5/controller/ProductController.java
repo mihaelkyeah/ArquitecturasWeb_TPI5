@@ -1,7 +1,6 @@
 package com.example.arquitecturaweb_tp5.controller;
 
 import com.example.arquitecturaweb_tp5.dto.ProductDTO;
-import com.example.arquitecturaweb_tp5.model.Client;
 import com.example.arquitecturaweb_tp5.model.Product;
 import com.example.arquitecturaweb_tp5.servicios.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -9,12 +8,17 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 

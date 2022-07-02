@@ -9,9 +9,9 @@ import lombok.Data;
 public class ProductDTO {
     private String name;
     private String description;
-    private String price;
+    private Float price;
 
-    public ProductDTO(String name, String description, String price) {
+    public ProductDTO(String name, String description, Float price) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -25,7 +25,7 @@ public class ProductDTO {
         return description;
     }
 
-    public String getPrice() {
+    public Float getPrice() {
         return price;
     }
 
@@ -37,7 +37,7 @@ public class ProductDTO {
         this.description = description;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 }

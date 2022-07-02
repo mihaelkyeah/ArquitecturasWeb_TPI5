@@ -16,8 +16,19 @@ public class Client {
     private String lastName;
     private String email;
 
+    public Client(Long id, String name, String lastName, String email) {
+        this.IdClient = id;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
+    public Client() {
+
+    }
+
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -25,7 +36,7 @@ public class Client {
     }
 
     public String getLastName() {
-        return lastName;
+        return this.lastName;
     }
 
     public void setLastName(String lastName) {
@@ -33,7 +44,7 @@ public class Client {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -41,7 +52,7 @@ public class Client {
     }
 
     public Long getIdClient() {
-        return IdClient;
+        return this.IdClient;
     }
 
 }
