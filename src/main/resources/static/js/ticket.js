@@ -27,6 +27,7 @@ addId(elemento,id)
  armarElemento()
 {
     let elemento = {
+        "idTicket": 0,
         "idCliente": document.getElementById("ticket-name").value,
         "date": document.getElementById("ticket-lastName").value,
         "total": document.getElementById("ticket-email").value

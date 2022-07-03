@@ -232,7 +232,7 @@ cargar(elemento){
 
 ////////////// METODOS POR CLASE ////////////
 
-    borrarId(elemento)
+   /* borrarId(elemento)
     {
         let id = elemento.id;
         delete elemento.id;
@@ -265,7 +265,7 @@ cargar(elemento){
 
     iniciarPagina() {
      //  
-    }
+    }*/
 }
 
 

@@ -44,6 +44,12 @@ public class TicketController {
         return ts.listSold();
     }
 
+    @Operation(summary = "Retorna un Ticket segun su ID")
+    @GetMapping(value = "/getById/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Ticket getTicketById(@PathVariable(value = "id") Long id) {
+        return ts.tr.getReferenceById(id);
+    }
+
     @Operation (summary = "Guarda un Ticket y sus TicketDetails")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Ticket agregado",
@@ -115,10 +121,10 @@ public class TicketController {
             @ApiResponse(responseCode = "406", description = "Ticket no actualizado",
                     content = @Content) })
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateProduct(@RequestBody Ticket p, @PathVariable Long id) {
-        Long ticket = this.ts.idTicket(id, p.getDate());
-        if(ticket != null){
-            Ticket save = this.ts.save(p);
+    public ResponseEntity<?> updateProduct(@RequestBody Ticket t, @PathVariable Long id) {
+        if( this.ts.existTikext(id)){
+            t.setIdTicket(id);
+            Ticket save = this.ts.save(t);
             if (save!=null)
                 return new ResponseEntity<>(HttpStatus.OK);
         }
@@ -127,12 +133,3 @@ public class TicketController {
 
 }
 
-/*
-    @PostMapping("/add")
-    public Long saveTicket(@RequestBody Ticket s) {
-        if (this.ts.save(s)){
-            Long idTicket = this.getIdTicket(s.getIdClient(),s.getDate());
-            return idTicket;
-        }
-        return null;
-    }*/
