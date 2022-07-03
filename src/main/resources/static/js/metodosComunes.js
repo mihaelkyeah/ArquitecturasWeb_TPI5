@@ -39,7 +39,7 @@ class metodosComunes{
 */
 cargar(elemento){
     if ((elemento) === null) {return;}
-    console.log(elemento);
+    //console.log(elemento);
     let fila = this.tabla.insertRow(-1);
     //Editar por id de tabla
     let id = this.borrarId(elemento)

@@ -69,7 +69,7 @@ cargarMasVendido(){
         console.log("Hubo un problema con la petición Fetch:" + error.message);
     });
 }
-
+agregarServidor(){let elemento = this.armarElemento();super.agregarServidor(elemento);}
 iniciarPagina() {
     this.cargarTabla();
     this.cargarMasVendido();

@@ -50,6 +50,7 @@ addId(elemento,id)
 
 filtrarFecha(){
     let day = document.getElementById("ticket-report-day").value;
+    console.log(day);
     let url = this.url+"/date/"+day;
     fetch(url, {
         method: 'GET',
