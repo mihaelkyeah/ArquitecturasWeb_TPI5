@@ -93,7 +93,8 @@ agregarServidor()
 }
 
 productoValido(){
-    if (this.product.value !== "")
+    let cant = document.getElementById("carrito-product-qty").value;
+    if (this.product.value !== "" && (1 <= cant && cant <= 3))
         {return true;}
     return false;
 }
