@@ -7,6 +7,7 @@ const url_productos = '../pages/product.html';
 const url_client = '../pages/client.html';
 const url_clientReporte = '../pages/clientReporte.html';
 const url_ticket = '../pages/ticket.html';
+const url_ticket_detail = '../pages/ticketDetail.html';
 const url_carrito = '../pages/carrito.html';
 let jsPagina;
 
@@ -44,7 +45,7 @@ function linkLoadCVS() {
         if (respuesta.ok) {
             console.log("200 ok LoadCVS");
         } else {
-            console.log("406 datos similaren en la base de datos");
+            console.log("406 datos similares en la base de datos");
         }
     }).catch(function (error) {
         console.log(error.message);
@@ -81,12 +82,16 @@ function cargar_pagina(pagina) {
                 jsPagina = new ticket();
                 jsPagina.iniciarPagina();
                 break;
+            case url_ticket_detail:
+                jsPagina = new ticketDetail();
+                jsPagina.iniciarPagina();
+                break;
             case url_clientReporte:
                 jsPagina = new metodosReporte("client/totalCompras","client-report-table");
                 jsPagina.iniciarPagina();
                 break;
             case url_carrito:
-                jsPagina = new metodosReporte("ticket/date","ticket-report-table");
+                jsPagina = new metodosReporte("ticket/date","ticket-report-table");    
             break;
         }
     }).catch((error) => {

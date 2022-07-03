@@ -1,0 +1,67 @@
+<div class="d-flex flex-column justify-content-center align-items-center">
+  <div class="d-flex flex-row justify-content around">
+    <div class="d-flex flex-column">
+      <h3>ID Ticket</h3>
+      <span id="ticketdetail-span-idticket"></span>
+    </div>
+    <div class="d-flex flex-column">
+      <h3>Cliente</h3>
+      <span id="ticketdetail-span-client"></span>
+    </div>
+    <div class="d-flex flex-column">
+      <h3>Fecha</h3>
+      <span id="ticketdetail-span-date"></span>
+    </div>
+    <div class="d-flex flex-column">
+      <h3>Total</h3>
+      <span id="ticketdetail-span-total"></span>
+    </div>
+  </div>
+</div>
+
+<form id="ticketDetail-form" name="ticketDetail-form">
+  <select name="ticketDetail-form-idTicket" id="ticketDetail-form-idTicket">
+    <option selected disabled value="">ID Ticket</option>
+  </select>
+  <select name="ticketDetail-form-idProducto" id="ticketDetail-form-idProducto">
+    <option selected disabled value="">ID Producto</option>
+  </select>
+  <input type="number" min="1" max="3" step="1" id="ticketDetail-form-quantity" name="ticketDetail-form-quantity">
+  <input type="number" id="ticketDetail-form-price" name="ticketDetail-form-price">
+  <button class="btn btn-success" id="ticketDetail-form-addDetail">Agregar...</button>
+</form>
+
+<table class="table" id="ticketDetail-table">
+  <thead>
+    <tr>
+      <th scope="col">idTicket</th>
+      <th scope="col">idCliente</th>
+      <th scope="col">idProduct</th>
+      <th scope="col">quantity</th>
+      <th scope="col">total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>4</td>
+      <td>7</td>
+      <td>1</td>
+      <td>$345</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>5</td>
+      <td>8</td>
+      <td>2</td>
+      <td>$456</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>6</td>
+      <td>9</td>
+      <td>3</td>
+      <td>$567</td>
+    </tr>
+  </tbody>
+</table>
