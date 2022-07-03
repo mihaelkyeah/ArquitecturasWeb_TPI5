@@ -8,6 +8,7 @@ import com.example.arquitecturaweb_tp5.dto.TicketCompraDto;
 import com.example.arquitecturaweb_tp5.model.Client;
 import com.example.arquitecturaweb_tp5.model.TicketDetails;
 import com.example.arquitecturaweb_tp5.servicios.ClientService;
+import com.example.arquitecturaweb_tp5.servicios.ProductService;
 import com.example.arquitecturaweb_tp5.servicios.TicketDetailsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -73,13 +74,14 @@ public class TicketController {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
         ticket.setDate(this.ts.nowDateSpecific());//pone la fecha actual
+        this.ts.calcularPrecio(this.lista,this.ticket);
         Ticket nuevo = this.ts.save(ticket);
         if (nuevo!=null){
-            idTicket = nuevo.getIdTicket();+
+            idTicket = nuevo.getIdTicket();
         }else {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
-        this.ps.calcularPrecio(this.lista,this.ticket);
+
         //----------------------------------------------------------
         for(TicketDetails tds : lista ){
             tds.setIdTicket(idTicket);
