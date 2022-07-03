@@ -72,6 +72,8 @@ filtrarFecha(){
     });
 }
 
+cantColumnasIgnora()
+{return 3;}
 cargar(elemento) {
     if ((elemento) === null) {return;}
     let fila = this.tabla.insertRow(-1);
@@ -104,7 +106,7 @@ cargar(elemento) {
     });
     celBorrar.appendChild(btnBorrar);
     fila.appendChild(celBorrar);
-    // Crear link ver detalle
+    // Crear link ver detalle 
     let celVerDetalle = fila.insertCell(0);
     let btnDetalle = document.createElement("Button");
     btnDetalle.type = "button";

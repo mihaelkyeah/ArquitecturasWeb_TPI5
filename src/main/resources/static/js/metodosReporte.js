@@ -17,7 +17,6 @@ class metodosReporte{
 */
 cargar(elemento){
     if ((elemento) === null) {return;}
-    console.log(elemento);
     let fila = this.tabla.insertRow(-1);
     //Crea todos los elementos
     for(var key in elemento){

@@ -192,7 +192,7 @@ cargar(elemento){
     let c = this.tabla.rows[0].cells.length;
     let i = 0;
     children.forEach(child => {
-        if ((i+2) < c)
+        if ((i+c-this.cantColumnasIgnora()) < c)
         {
             valoresAnteriores[i]= child.innerHTML;
             child.contentEditable = "true";
@@ -203,7 +203,7 @@ cargar(elemento){
     btnGuardar.innerHTML = "Guardar";
     btnGuardar.type = "button";
     btnGuardar.addEventListener('click', e => { this.guardarCambios(fila, valoresAnteriores, id);});
-    fila.replaceChild(btnGuardar,fila.children[c-2]);
+    fila.replaceChild(btnGuardar,fila.children[c-this.cantColumnasIgnora()]);
 }
 
 /**
@@ -229,7 +229,8 @@ cargar(elemento){
             });
         }
     }
-
+cantColumnasIgnora()
+{return 2;}
 ////////////// METODOS POR CLASE ////////////
 
    /* borrarId(elemento)
