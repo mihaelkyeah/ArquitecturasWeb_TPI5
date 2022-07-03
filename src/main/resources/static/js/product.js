@@ -29,9 +29,9 @@ class product extends metodosComunes{
 
     leerFila(fila){
     let elemento = {
-        "name": fila.children[1].innerHTML,
+        "name": fila.children[3].innerHTML,
         "description": fila.children[2].innerHTML,
-        "price": fila.children[3].innerHTML,
+        "price": fila.children[1].innerHTML,
         "stock": fila.children[0].innerHTML
     }
     return elemento;
