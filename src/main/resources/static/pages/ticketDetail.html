@@ -1,44 +1,21 @@
-<div class="d-flex flex-column justify-content-center align-items-center">
-  <div class="d-flex flex-row justify-content around">
-    <div class="d-flex flex-column">
-      <h3>ID Ticket</h3>
-      <span id="ticketdetail-span-idticket"></span>
-    </div>
-    <div class="d-flex flex-column">
-      <h3>Cliente</h3>
-      <span id="ticketdetail-span-client"></span>
-    </div>
-    <div class="d-flex flex-column">
-      <h3>Fecha</h3>
-      <span id="ticketdetail-span-date"></span>
-    </div>
-    <div class="d-flex flex-column">
-      <h3>Total</h3>
-      <span id="ticketdetail-span-total"></span>
-    </div>
-  </div>
-</div>
 
-<form id="ticketDetail-form" name="ticketDetail-form">
-  <select name="ticketDetail-form-idTicket" id="ticketDetail-form-idTicket">
-    <option selected disabled value="">ID Ticket</option>
+<form class="d-flex flex-row justify-content-center gap-1em" method="POST" action="" id="form-cart" name="form-cart">
+  <label for="details-product">Select product</label>
+  <select name="details-product" id="details-product">
+    <option selected disabled value="">Select product</option>
   </select>
-  <select name="ticketDetail-form-idProducto" id="ticketDetail-form-idProducto">
-    <option selected disabled value="">ID Producto</option>
-  </select>
-  <input type="number" min="1" max="3" step="1" id="ticketDetail-form-quantity" name="ticketDetail-form-quantity">
-  <input type="number" id="ticketDetail-form-price" name="ticketDetail-form-price">
-  <button class="btn btn-success" id="ticketDetail-form-addDetail">Agregar...</button>
+  <label for="carrito-product-qty">Product quantity</label>
+  <input type="number" name="details-product-qty" id="details-product-qty" min="1" max="3" step="1"></input>
+  <input type="submit" id="details-submit" value="Add producto"></input>
 </form>
-
 <table class="table" id="ticketDetail-table">
   <thead>
     <tr>
-      <th scope="col">idTicket</th>
-      <th scope="col">idCliente</th>
-      <th scope="col">idProduct</th>
+      <th scope="col">price</th>
       <th scope="col">quantity</th>
-      <th scope="col">total</th>
+      <th scope="col">Product</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>

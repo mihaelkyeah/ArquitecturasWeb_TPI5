@@ -42,7 +42,7 @@ cargar(elemento){
     //console.log(elemento);
     let fila = this.tabla.insertRow(-1);
     //Editar por id de tabla
-    let id = this.borrarId(elemento)
+    let id = this.borrarId(elemento);
     //Crea todos los elementos
     for(var key in elemento){
         let cel = fila.insertCell(0);

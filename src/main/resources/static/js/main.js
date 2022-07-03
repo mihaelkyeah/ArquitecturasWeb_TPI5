@@ -7,8 +7,8 @@ const url_productos = '../pages/product.html';
 const url_client = '../pages/client.html';
 const url_clientReporte = '../pages/clientReporte.html';
 const url_ticket = '../pages/ticket.html';
-const url_ticket_detail = '../pages/ticketDetail.html';
 const url_carrito = '../pages/carrito.html';
+const url_ticketDetail = '../pages/ticketDetail.html';
 let jsPagina;
 
 document.getElementById("pag1").addEventListener('click', (e) => {
@@ -82,10 +82,6 @@ function cargar_pagina(pagina) {
                 jsPagina = new ticket();
                 jsPagina.iniciarPagina();
                 break;
-            case url_ticket_detail:
-                jsPagina = new ticketDetail();
-                jsPagina.iniciarPagina();
-                break;
             case url_clientReporte:
                 jsPagina = new metodosReporte("client/totalCompras","client-report-table");
                 jsPagina.iniciarPagina();
@@ -100,3 +96,26 @@ function cargar_pagina(pagina) {
     });
 }
 
+function cargar_paginaID(pagina,id) {
+    let contenido = document.getElementById("contenido");
+    fetch(pagina).then((response) => {
+        if (response.ok)
+            return response.text();
+        else
+            contenido.innerHTML = "<h1>Error to Load</h1>";
+    }).then((response) => {
+
+        contenido.innerHTML = "";
+        contenido.innerHTML = response;
+
+    }).then(function () {
+        switch (pagina) {
+            case url_ticketDetail:
+                jsPagina = new ticketDetail(id);
+                jsPagina.iniciarPagina();
+                break;
+        }
+    }).catch((error) => {
+        console.log(error);
+    });
+}

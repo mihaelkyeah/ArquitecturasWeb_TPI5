@@ -33,6 +33,7 @@ public class TicketDetailsService {
      */
     @Transactional
     public Boolean save(TicketDetails i) {
+        i.setPrice(ps.findProduct(i.getIdProduct()).get().getPrice());
         ps.restarStock(i.getIdProduct(), i.getQuantity());
         this.td.saveAndFlush(i);
         return true;

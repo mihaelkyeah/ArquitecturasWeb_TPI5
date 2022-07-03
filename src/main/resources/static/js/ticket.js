@@ -64,7 +64,7 @@ filtrarFecha(){
            this.tabla.deleteRow(-1);
        }
        elementos.forEach(e => {
-           this.cargar_overrideado(e);
+           this.cargar(e);
        });
    })
     .catch(function(error) {
@@ -72,9 +72,9 @@ filtrarFecha(){
     });
 }
 
-cargar_overrideado(e) {
+cargar(elemento) {
     if ((elemento) === null) {return;}
-    //console.log(elemento);
+    console.log(elemento);
     let fila = this.tabla.insertRow(-1);
     //Editar por id de tabla
     let id = this.borrarId(elemento)
@@ -111,14 +111,15 @@ cargar_overrideado(e) {
     btnDetalle.type = "button";
     btnDetalle.innerHTML = "Ver detalles";
     btnDetalle.addEventListener('click', e => {
-        cargar_pagina(url_ticket_detail);
+        e.preventDefault();
+        cargar_paginaID(url_ticketDetail,id)
     });
     celVerDetalle.appendChild(btnDetalle);
     fila.appendChild(celVerDetalle);
     // ====================================== //
     // Agrega la fila a la tabla
     this.tabla.appendChild(fila);
-  }
+}
 
 iniciarPagina() {
     this.cargarTabla();
