@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.arquitecturaweb_tp5.model.Ticket;
+import com.example.arquitecturaweb_tp5.model.TicketDetails;
+import com.example.arquitecturaweb_tp5.model.Product;
 import com.example.arquitecturaweb_tp5.repository.TicketRepository;
 
 @Service
@@ -16,7 +18,8 @@ public class TicketService {
 
     @Autowired
     public TicketRepository tr;
-
+    @Autowired
+    public ProductService ps;
     /**
      * Retorna una lists de Tcket
      * @return
@@ -105,5 +108,17 @@ public class TicketService {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
         return sdf.format(cal.getTime());
+    }
+
+    public void calcularPrecio(List<TicketDetails> lista, Ticket ticket) {
+        float suma = 0;
+        for (int i = 0; i < lista.size(); i++){
+            TicketDetails t = lista.get(i);
+            Optional<Product> p = ps.findProduct(t.getIdProduct());
+            float price = p.get().getPrice();
+            suma = suma + (price * t.getQuantity());
+            t.setPrice(price);
+        }
+        ticket.setTotal(suma);
     }
 }

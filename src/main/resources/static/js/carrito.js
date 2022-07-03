@@ -2,11 +2,12 @@
 class carrito{
     constructor() {
         this.postUrl = "http://localhost:8080/ticket/add";
-        this.productUrl = "http://localhost:8080/product/all";
+        this.productUrl = "http://localhost:8080/product";
         this.product = document.getElementById("carrito-product");
         this.clientUrl = "http://localhost:8080/client/all";
         this.client= document.getElementById("carrito-client");
         this.tabla =document.getElementById("carrito-table");
+        this.carrito = {};
 	}
 
 /**
@@ -14,26 +15,21 @@ class carrito{
  * Devuelve un json cargados con los valores leidos del formulario
  */
  armarElemento()
-{
+{ 
     let elemento = {
-        "idCliente": document.getElementById("ticket-client").value,
-        "total": document.getElementById("ticket-total").value
+        "ticketDetails": [],
+        "ticket": {
+            "idClient": document.getElementById("carrito-client").value,
+            "total": 0
+        }
+    };
+    for(var key in this.carrito){
+        let details = { "idProduct":key, "quantity":this.carrito[key],"price":0};
+        elemento.ticketDetails.push(details);
     }
     return elemento;
 }
 
-regresarAnteriores(fila, valoresAnteriores){
-    let children = Array.from(fila.children);
-    let c = this.tabla.rows[0].cells.length;
-    let i = 0;
-    children.forEach(child => {
-        if ((i+2) < c)
-        {
-            child.innerHTML = valoresAnteriores[i];
-            i++;
-        }
-    });
-}
 cargarSelector(url, selector){
     fetch(url, {
         method: 'GET',
@@ -65,6 +61,7 @@ cargarSelector(url, selector){
 agregarServidor()
 { 
     let elemento = this.armarElemento();
+    console.log(elemento);
     fetch((this.postUrl), {
         'method': 'POST',
         'headers': {
@@ -102,12 +99,17 @@ productoValido(){
 
 cargar(){
     //Celdas del producto
+    console.log(this.carrito);
+    let valor = document.getElementById("carrito-product-qty").value;
+    let clave =     this.product.value;
     let fila = this.tabla.insertRow(-1);
     let cel = fila.insertCell(0);
-    cel.innerHTML =  document.getElementById("carrito-product-qty").value;
-    let cel2 = fila.insertCell(0);
-    cel2.innerHTML =this.product.value;
 
+    cel.innerHTML =  valor;
+    let cel2 = fila.insertCell(0);
+    cel2.innerHTML =clave;
+    (this.carrito[clave] === undefined) ? this.carrito[clave] = valor : this.carrito[clave] = Number.parseInt(this.carrito[clave],10)+ valor;
+    console.log(this.carrito);
     //Crea el boton de editar
     let celEditar = fila.insertCell(0);
     let btnEditar = document.createElement("button");
@@ -135,55 +137,40 @@ cargar(){
 }
 
 //Esta funcion deja de permitir la edicion de la tabla y que cambios ocurren
-guardarCambios(fila, valoresAnteriores)
+guardarCambios(fila, valorAnterior)
 {
     //Deja de poder se editable
-    let children = Array.from(fila.children);
-    let i = 0;
-    children.forEach(child => {
-        if (child.contentEditable == "true")
-        {child.contentEditable = "false";
-        i++;}
-    });
+    fila.children[1].contentEditable = "false";
     //Verifica si esta todo bien
     if (this.cambioValido(fila))
     {
         //Pregunta si esta seguro
         if (!confirm("¿Seguro que desea modificar?"))
         {
-            this.regresarAnteriores(fila, valoresAnteriores);
+            fila.children[1].innerHTML = valorAnterior;
         }
     }
-    else {this.regresarAnteriores(fila, valoresAnteriores);}
+    else {fila.children[1].innerHTML = valorAnterior;}
     //Vuelve a poner el mismo boton que estaba antes, esto se hizo porque si solo modificabas el evento bucleaba
     let btnEditar = document.createElement("button");
     btnEditar.innerHTML = "Editar";
     btnEditar.type = "button";
     btnEditar.addEventListener('click', e => { this.editarElemento(fila);});
-    fila.replaceChild(btnEditar,fila.children[i]);
+    fila.replaceChild(btnEditar,fila.children[2]);
 }
 
 //Esta funcion permite la edicion de la tabla
  editarElemento(fila)
 {
     //Se guardan los valores viejos y las celdas se vuelven editables
-    let valoresAnteriores  = [];
-    let children = Array.from(fila.children);
-    let c = this.tabla.rows[0].cells.length;
-    let i = 0;
-    children.forEach(child => {
-        if ((i+2) < c)
-        {
-            valoresAnteriores[i]= child.innerHTML;
-            child.contentEditable = "true";
-            i++;}
-    });
+    let valorAnterior  = fila.children[1].innerHTML;
+    fila.children[1].contentEditable = "true";
     //Se crea un boton que al apretarse confirma los cambios, este reemplaza el boton anterior
     let btnGuardar = document.createElement("button");
     btnGuardar.innerHTML = "Guardar";
     btnGuardar.type = "button";
-    btnGuardar.addEventListener('click', e => { this.guardarCambios(fila, valoresAnteriores);});
-    fila.replaceChild(btnGuardar,fila.children[c-2]);
+    btnGuardar.addEventListener('click', e => { this.guardarCambios(fila, valorAnterior);});
+    fila.replaceChild(btnGuardar,fila.children[2]);
 }
 
 limpiarTabla(){
@@ -196,7 +183,7 @@ limpiarTabla(){
 iniciarPagina() {
     this.limpiarTabla();
     this.cargarSelector(this.clientUrl,this.client);
-    this.cargarSelector(this.productUrl,this.product);
+    this.cargarSelector(this.productUrl+"/all",this.product);
     document.querySelector('#ticket-submit').addEventListener('click', (event) => {
         event.preventDefault();
         this.agregarServidor();

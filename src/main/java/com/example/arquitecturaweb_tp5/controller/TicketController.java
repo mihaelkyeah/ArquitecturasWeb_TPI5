@@ -75,11 +75,11 @@ public class TicketController {
         ticket.setDate(this.ts.nowDateSpecific());//pone la fecha actual
         Ticket nuevo = this.ts.save(ticket);
         if (nuevo!=null){
-            idTicket = nuevo.getIdTicket();
+            idTicket = nuevo.getIdTicket();+
         }else {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
-
+        this.ps.calcularPrecio(this.lista,this.ticket);
         //----------------------------------------------------------
         for(TicketDetails tds : lista ){
             tds.setIdTicket(idTicket);
