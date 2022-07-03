@@ -42,11 +42,6 @@ cambioValido(){
     return true;
 }
 
-addId(elemento,id)
-    {     
-        elemento.idProduct=id;
-    }
-
 cargarMasVendido(){
     fetch(this.url + "/mas-vendido", {
         method: 'GET',

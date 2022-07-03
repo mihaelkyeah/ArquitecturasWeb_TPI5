@@ -123,7 +123,6 @@ cargar(elemento){
 {
     //Crea el elemento los valores de la fila alterada
     let elemento = this.leerFila(fila);
-   // this.addId(elemento,id);
     console.log(elemento);
     //Encuentra el elemento por su ID y lo pisa con los datos nuevos
     fetch((this.url+ '/update/' +id),{
@@ -238,12 +237,7 @@ cargar(elemento){
         delete elemento.id;
         return id;
     }
-
-    addId(elemento,id)
-    {     
-        elemento.id=id;
-    }
-
+    
     armarElemento()
     {
         let elemento = {

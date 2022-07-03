@@ -15,11 +15,6 @@ borrarId(elemento)
     return id;
 }
 
-addId(elemento,id)
-    {     
-        elemento.idTicket=id;
-    }
-
 /**
  * @returns elemento JSON
  * Devuelve un json cargados con los valores leidos del formulario
@@ -27,9 +22,8 @@ addId(elemento,id)
  armarElemento()
 {
     let elemento = {
-        "idCliente": document.getElementById("ticket-name").value,
-        "date": document.getElementById("ticket-lastName").value,
-        "total": document.getElementById("ticket-email").value
+        "idCliente": document.getElementById("ticket-client").value,
+        "total": document.getElementById("ticket-total").value
     }
     return elemento;
 }
@@ -42,7 +36,6 @@ addId(elemento,id)
  leerFila(fila){
     let elemento = {
         "idCliente": fila.children[2].innerHTML,
-        "date": fila.children[1].innerHTML,
         "total": fila.children[0].innerHTML
     }
     return elemento;

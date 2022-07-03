@@ -86,7 +86,8 @@ function cargar_pagina(pagina) {
                 jsPagina.iniciarPagina();
                 break;
             case url_carrito:
-                jsPagina = new metodosReporte("ticket/date","ticket-report-table");
+                jsPagina = new carrito();
+                jsPagina.iniciarPagina();
             break;
         }
     }).catch((error) => {
