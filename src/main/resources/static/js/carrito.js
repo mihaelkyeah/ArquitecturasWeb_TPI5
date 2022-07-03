@@ -19,12 +19,12 @@ class carrito{
     let elemento = {
         "ticketDetails": [],
         "ticket": {
-            "idClient": document.getElementById("carrito-client").value,
+            "idClient": this.client.value,
             "total": 0
         }
     };
     for(var key in this.carrito){
-        let details = { "idProduct":key, "quantity":this.carrito[key],"price":0};
+        let details = {"idTicket":0, "idProduct":key, "quantity":this.carrito[key],"price":0};
         elemento.ticketDetails.push(details);
     }
     return elemento;
@@ -49,7 +49,7 @@ cargarSelector(url, selector){
         elementos.forEach(e => {
         let option= document.createElement('option');
         option.innerHTML= e.name;
-        option.value = e.idProduct;
+        (e.idProduct !== undefined) ? option.value =e.idProduct : option.value =e.idClient;
         selector.appendChild(option);
        });
    })
@@ -71,8 +71,10 @@ agregarServidor()
         'body': JSON.stringify(elemento)
     })
     .then(respuesta =>{ 
-        if (respuesta.status == 200) {
-            this.cargarTabla();
+        if (respuesta.status == 200) {      
+            this.limpiarTabla();
+            this.carrito = {};
+            alert("Ticket realizado.");
         }
         else {
             alert("La solicitud al servidor falló.");
