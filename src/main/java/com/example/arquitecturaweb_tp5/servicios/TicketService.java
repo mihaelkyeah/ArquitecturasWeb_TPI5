@@ -56,7 +56,7 @@ public class TicketService {
     }
 
     /**
-     * Retorna un Ticket segun fecha y idClient
+     * Retorna un id Ticket segun fecha y idClient
      * @param id
      * @param date
      * @return
@@ -64,6 +64,22 @@ public class TicketService {
     @Transactional(readOnly = true)
     public Long idTicket(Long id, String date) {
         return  this.tr.getSpecificTicket(id, date);
+
+    }
+
+    /**
+     * Retorna un Ticket segun fecha y idClient
+     * @param id
+     * @param date
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public boolean existTikext(Long id) {
+        Ticket t = this.tr.getById(id);
+        if(t == null){
+            return false;
+        }
+        return true;
 
     }
 

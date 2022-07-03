@@ -49,7 +49,6 @@ public class TicketDetailsController {
             @ApiResponse(responseCode = "200", description = "TicketDetails eliminado",
                     content = { @Content}),
     })
-
     @DeleteMapping("/deleteByIdTicket/{id}")
     public ResponseEntity<?> deleteAllByIdTicket(@PathVariable(value = "id") Long id) {
 
@@ -65,12 +64,18 @@ public class TicketDetailsController {
             @ApiResponse(responseCode = "406", description = "TicketDetails no actualizado",
                     content = @Content) })
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateProduct(@RequestBody TicketDetails p, @PathVariable Long id) {
+    public ResponseEntity<?> updateProduct(@RequestBody TicketDetails p, @PathVariable Long id){
         Optional<TicketDetails> ticket = this.tds.findTicketDetail(id);
         if(ticket != null){
             if (this.tds.save(p))
                 return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @Operation (summary = "Retorna todos los TicketDetails segun un ID Ticket")
+    @GetMapping(value = "/getTicketDetailsByID/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<TicketDetails> getByIdTicket(@PathVariable(value = "id") Long id) {
+        return tds.listDetails(id);
     }
 }

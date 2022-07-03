@@ -79,4 +79,7 @@ public class TicketDetailsService {
         return true;
     }
 
+    public List<TicketDetails> listDetails(Long id) {
+        return this.td.findDetailByIdTicket(id);
+    }
 }

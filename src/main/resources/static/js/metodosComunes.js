@@ -103,6 +103,7 @@ cargar(elemento){
     })
      .catch(function(error) {
          console.log("Hubo un problema con la petición Fetch:" + error.message);
+         console.log(this.url);
      });
  }
 
@@ -231,7 +232,7 @@ cargar(elemento){
 
 ////////////// METODOS POR CLASE ////////////
 
-    borrarId(elemento)
+   /* borrarId(elemento)
     {
         let id = elemento.id;
         delete elemento.id;
@@ -259,7 +260,7 @@ cargar(elemento){
 
     iniciarPagina() {
      //  
-    }
+    }*/
 }
 
 
