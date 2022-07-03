@@ -39,7 +39,7 @@ class metodosComunes{
 */
 cargar(elemento){
     if ((elemento) === null) {return;}
-   // console.log(elemento);
+    console.log(elemento);
     let fila = this.tabla.insertRow(-1);
     //Editar por id de tabla
     let id = this.borrarId(elemento)
@@ -123,7 +123,7 @@ cargar(elemento){
 {
     //Crea el elemento los valores de la fila alterada
     let elemento = this.leerFila(fila);
-    this.addId(elemento,id);
+   // this.addId(elemento,id);
     console.log(elemento);
     //Encuentra el elemento por su ID y lo pisa con los datos nuevos
     fetch((this.url+ '/update/' +id),{

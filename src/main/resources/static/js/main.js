@@ -78,7 +78,8 @@ function cargar_pagina(pagina) {
                 jsPagina.iniciarPagina();
                 break;
             case url_ticket:
-                ticket_pagina();
+                jsPagina = new ticket();
+                jsPagina.iniciarPagina();
                 break;
             case url_clientReporte:
                 jsPagina = new metodosReporte("client/totalCompras","client-report-table");
