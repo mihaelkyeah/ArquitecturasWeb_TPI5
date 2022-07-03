@@ -7,7 +7,7 @@ const url_productos = '../pages/product.html';
 const url_client = '../pages/client.html';
 const url_clientReporte = '../pages/clientReporte.html';
 const url_ticket = '../pages/ticket.html';
-const url_ticketReporte = '../pages/ticketReporte.html';
+const url_carrito = '../pages/carrito.html';
 let jsPagina;
 
 document.getElementById("pag1").addEventListener('click', (e) => {
@@ -33,7 +33,7 @@ document.getElementById("pag5").addEventListener('click', (e) => {
 
 document.getElementById("pag6").addEventListener('click', (e) => {
     e.preventDefault();
-    cargar_pagina(url_ticketReporte);
+    cargar_pagina(url_carrito);
 });
 
 function linkLoadCVS() {
@@ -85,7 +85,7 @@ function cargar_pagina(pagina) {
                 jsPagina = new metodosReporte("client/totalCompras","client-report-table");
                 jsPagina.iniciarPagina();
                 break;
-            case url_ticketReporte:
+            case url_carrito:
                 jsPagina = new metodosReporte("ticket/date","ticket-report-table");
             break;
         }
@@ -94,43 +94,3 @@ function cargar_pagina(pagina) {
     });
 }
 
-function ticket_pagina() {
-    url = 'http://localhost:8080/ticket';
-    tabla = document.getElementById("ticket-table");
-    cargarTabla();
-    document.querySelector('#ticket-submit').addEventListener('click', (event) => {
-        event.preventDefault();
-        agregarServidor();
-    });
-    /*
-       function borrarId(elemento)
-       {
-           let id = elemento.idTicket;
-           delete elemento.idTicket;
-           return id;
-       }
-
-       /**
-        * @returns elemento JSON
-        * Devuelve un json cargados con los valores leidos del formulario
-        */ /*
-    function armarElemento()
-    {
-        let elemento = {
-            "total": document.getElementById("ticket-total").value
-        }
-        return elemento;
-    }
-
-    function cambioValido(){
-
-        return true;
-    }
-
-    function leerFila(fila){
-        let elemento = {
-            "total": fila.children[0].innerHTML
-        }
-        return elemento;
-    } */
-}
