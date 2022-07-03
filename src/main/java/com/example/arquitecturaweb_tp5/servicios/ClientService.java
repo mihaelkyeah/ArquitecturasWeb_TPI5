@@ -33,6 +33,7 @@ public class ClientService {
         this.client.saveAndFlush(c);
         return true;
     };
+
     @Transactional
     public boolean update(Client c) {
         this.client.saveAndFlush(c);

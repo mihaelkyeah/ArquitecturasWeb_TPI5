@@ -109,7 +109,7 @@ public class ClientController {
         Optional<Client> client = this.cs.findClient(id);
         if(!client.isEmpty()){
             c.setIdClient(id);
-            if (this.cs.save(c))
+            if (this.cs.update(c))
                 return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
