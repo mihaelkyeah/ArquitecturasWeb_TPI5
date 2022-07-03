@@ -1,8 +1,8 @@
 <form id="add-product" name="add-product" method="POST" action="">
-  <input type="text" id="product-name" name="product-name"></input>
-  <input type="text" id="product-description" name="product-description"></input>
-  <input type="number" id="product-price" name="product-price"></input>
-  <input type="number" id="product-stock" name="product-stock"></input>
+  <input type="text" id="product-name" name="product-name" placeholder="Enter name"></input>
+  <input type="text" id="product-description" name="product-description" placeholder="Enter description"></input>
+  <input type="number" id="product-price" name="product-price" placeholder="Enter price"></input>
+  <input type="number" id="product-stock" name="product-stock" placeholder="Enter stock" min="1" max="9999" step="1"></input>
   <input type="submit" id="product-submit" value="Add product"></input>
 </form>
 <!-- Producto mejor vendido -->
@@ -13,9 +13,9 @@
   <thead>
     <tr>
       <th scope="col">Stock</th>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
       <th scope="col">Price</th>
+      <th scope="col">Description</th>
+      <th scope="col">Name</th>
       <th scope="col">Edit</th>
       <th scope="col">Delete</th>
     </tr>
