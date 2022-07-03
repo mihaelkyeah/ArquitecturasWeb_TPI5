@@ -1,15 +1,15 @@
 "use strict";
-/*
+
 class ticketDetail extends metodosReporte {
   constructor(id) {
     super("ticketDetails/getTicketDetailsByID/"+id, "ticketDetail-table");
   }
-*/
+
 /**
 * @param {elemento}
 * Crea una nueva fila en la tabla
 */
-/*
+
 cargar(elemento){
   if ((elemento) === null) {return;}
   console.log(elemento);
@@ -25,8 +25,8 @@ cargar(elemento){
   this.tabla.appendChild(fila);
 }
 
-}*/
-
+}
+/*
 class ticketDetail extends metodosComunes {
   constructor(id) {
     super("ticketDetails", "ticketDetail-table");
@@ -171,3 +171,4 @@ iniciarPagina() {
     });
   }
 }
+*/
