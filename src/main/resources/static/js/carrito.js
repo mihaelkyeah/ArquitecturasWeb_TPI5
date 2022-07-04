@@ -132,6 +132,8 @@ cargar(){
     btnBorrar.className = "btn waves-effect waves-light red";
     btnBorrar.addEventListener('click', e => { 
         this.tabla.removeChild(fila);
+        delete this.carrito[clave];
+        console.log(this.carrito);
     });
     celBorrar.appendChild(btnBorrar);
     fila.appendChild(celBorrar);
@@ -151,7 +153,9 @@ guardarCambios(fila, valorAnterior)
         if (!confirm("¿Seguro que desea modificar?"))
         {
             fila.children[1].innerHTML = valorAnterior;
-        }
+            
+        }else{ let key = fila.children[0].innerHTML;
+            this.carrito[key]= fila.children[1].innerHTML;}
     }
     else {fila.children[1].innerHTML = valorAnterior;}
     //Vuelve a poner el mismo boton que estaba antes, esto se hizo porque si solo modificabas el evento bucleaba
