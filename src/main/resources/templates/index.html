@@ -3,14 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>TPE-5</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">-->
+    <!-- Compiled and minified CSS -->
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" th:href="@{/css/materialize.min.css}"  media="screen,projection"/>
+    <link rel="stylesheet" th:href="@{/css/style.scss}">
 </head>
 <body>
 
-    <ul class="nav justify-content-center">
-
+<nav>
+    <div class="nav-wrapper blue">
+    <ul class="nav-wrapper">
+        <li class="nav-item">
+                <h5>|  Arquitecturas WEB TP5  |</h5>
+        </li>
         <li class="nav-item">
             <li class="nav-item"><a id="pag1" class="nav-link">Home</a></li>
         </li>
@@ -30,14 +42,20 @@
             <li class="nav-item"><a id="pag6" class="nav-link">Cart</a></li>
         </li>
     </ul>
+    </div>
+</nav>
 
-
-    <div id="contenido">
+    <div id="contenido" >
 
     </div>
 
-    <!-- JavaScript Bundle with Popper -->
+   <!--  JavaScript Bundle with Popper
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    -->
+   <!-- Compiled and minified JavaScript -->
+
+    <script type="text/javascript" th:src="@{/js/materialize.min.js}"></script>
+
     <script type="text/javascript" src="../js/metodosReporte.js" th:src="@{/js/metodosReporte.js}"></script>
     <script type="text/javascript" src="../js/metodosComunes.js" th:src="@{/js/metodosComunes.js}"></script>
     <script type="text/javascript" src="../js/client.js" th:src="@{/js/client.js}"></script>

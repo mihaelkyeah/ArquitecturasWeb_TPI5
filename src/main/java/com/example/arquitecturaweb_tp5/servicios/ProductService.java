@@ -15,9 +15,9 @@ import java.util.Optional;
 public class ProductService {
 
     @Autowired
-    public ProductReporitory pr;
+    private ProductReporitory pr;
     @Autowired
-    public TicketDetailsRepository tdr;
+    private TicketDetailsRepository tdr;
 
     private int maxSoldProduct = 3;
 
@@ -110,4 +110,6 @@ public class ProductService {
         Product p = this.pr.getById(idProduct);
         return p.getStock();
     }
+
+
 }

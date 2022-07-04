@@ -17,7 +17,7 @@ import com.example.arquitecturaweb_tp5.repository.TicketRepository;
 public class TicketService {
 
     @Autowired
-    public TicketRepository tr;
+    private TicketRepository tr;
     @Autowired
     public ProductService ps;
     /**
@@ -120,5 +120,14 @@ public class TicketService {
             t.setPrice(price);
         }
         ticket.setTotal(suma);
+    }
+
+    /**
+     * Retorna unTicket segun su ID
+     * @param Ticket
+     * @return
+     */
+    public Ticket getReferenceById(Long id) {
+        return this.tr.getReferenceById(id);
     }
 }

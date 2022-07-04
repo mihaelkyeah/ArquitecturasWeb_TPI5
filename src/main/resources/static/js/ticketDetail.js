@@ -55,8 +55,8 @@ class ticketDetail extends metodosComunes {
      //Crea el boton de editar
      let celEditar = fila.insertCell(0);
      let btnEditar = document.createElement("button");
-     btnEditar.innerHTML = "Editar";
-     btnEditar.type = "button";
+      btnEditar.innerHTML = "Editar";
+      btnEditar.type = "button";
  
      btnEditar.addEventListener('click', e => { 
          this.editarElemento(fila, id);

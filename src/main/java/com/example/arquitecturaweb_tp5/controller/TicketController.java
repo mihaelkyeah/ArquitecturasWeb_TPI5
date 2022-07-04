@@ -31,6 +31,8 @@ public class TicketController {
     private TicketService ts;
     @Autowired
     private TicketDetailsService tds;
+    @Autowired
+    private ProductService ps;
 
     @Autowired
     private ClientService cs;
@@ -48,7 +50,7 @@ public class TicketController {
     @Operation(summary = "Retorna un Ticket segun su ID")
     @GetMapping(value = "/getById/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Ticket getTicketById(@PathVariable(value = "id") Long id) {
-        return ts.tr.getReferenceById(id);
+        return ts.getReferenceById(id);
     }
 
     @Operation (summary = "Guarda un Ticket y sus TicketDetails")

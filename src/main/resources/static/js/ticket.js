@@ -87,9 +87,9 @@ cargar(elemento) {
     //Crea el boton de editar
     let celEditar = fila.insertCell(0);
     let btnEditar = document.createElement("button");
-    btnEditar.innerHTML = "Editar";
+    btnEditar.innerHTML = "<i class=\"large material-icons\">create</i>";
     btnEditar.type = "button";
-
+    btnEditar.className = "btn waves-effect waves-light amber";
     btnEditar.addEventListener('click', e => { 
         this.editarElemento(fila, id);
     });
@@ -99,8 +99,9 @@ cargar(elemento) {
     //Crea el boton de borrar
     let celBorrar = fila.insertCell(0);
     let btnBorrar = document.createElement("button");
-    btnBorrar.innerHTML = "Borrar";
+    btnBorrar.innerHTML = "<i class=\"large material-icons\">delete_forever</i>";
     btnBorrar.type = "button";
+    btnBorrar.className = "btn waves-effect waves-light red";
     btnBorrar.addEventListener('click', e => { 
         this.borrarElemento(fila, id);
     });
@@ -109,8 +110,9 @@ cargar(elemento) {
     // Crear link ver detalle 
     let celVerDetalle = fila.insertCell(0);
     let btnDetalle = document.createElement("Button");
+    btnDetalle.innerHTML = "<i class=\"large material-icons\">attach_file</i>";
     btnDetalle.type = "button";
-    btnDetalle.innerHTML = "Ver detalles";
+    btnDetalle.className = "btn waves-effect waves-light purple lighten-3";
     btnDetalle.addEventListener('click', e => {
         e.preventDefault();
         cargar_paginaID(url_ticketDetail,id)

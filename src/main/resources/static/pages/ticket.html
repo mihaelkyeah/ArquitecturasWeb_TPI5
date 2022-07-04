@@ -1,44 +1,63 @@
-<h1>Ticket</h1>
 
-<!-- Filtrar tickets por fecha -->
-<form id="form-ticket-report" name="form-ticket-report" class="d-flex flex-row justify-content-center gap-1em" method="POST" action="" >
-  <label for="ticket-report-day">Reporte fecha</label>
-  <input type="date" name="ticket-report-day" id="ticket-report-day"></input>
-  <input type="submit" id="ticket-report-submit" value="Find"></input>
-</form>
-<!-- Ticket actual (traido o en edición) -->
-<table class="table" id="ticket-table">
-  <thead>
-    <tr>
-      <th scope="col">Total</th>
-      <th scope="col">Fecha</th>
-      <th scope="col">Cliente</th>
-      <th scope="col">Edit</th>
-      <th scope="col">Delete</th>
-      <th scope="col">View details</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">#1</th>
-      <td>Client name</td>
-      <td>Product name</td>
-      <td>1</td>
-      <td><button class="btn btn-danger table-ticket-delete"><strong>x</strong></button></td>
-    </tr>
-    <tr>
-      <th scope="row">#2</th>
-      <td>Client name</td>
-      <td>Product name</td>
-      <td>3</td>
-      <td><button class="btn btn-danger table-ticket-delete"><strong>x</strong></button></td>
-    </tr>
-    <tr>
-      <th scope="row">#3</th>
-      <td>Client name</td>
-      <td>Product name</td>
-      <td>2</td>
-      <td><button class="btn btn-danger table-ticket-delete"><strong>x</strong></button></td>
-    </tr>
-  </tbody>
-</table>
+<h4>Ticket</h4>
+
+<div class="row">
+  <div class="col s4"></div>
+  <div class="col s4">
+    <!-- Filtrar tickets por fecha -->
+
+    <form id="form-ticket-report" name="form-ticket-report" class="d-flex flex-row justify-content-center gap-1em" method="POST" action="" >
+      <h5>Filter Report By Date</h5>
+      <input type="date" name="ticket-report-day" id="ticket-report-day"></input>
+      <input type="submit" id="ticket-report-submit" value="Find" class="waves-effect waves-light btn"></input>
+    </form>
+  </div>
+  <div class="col s4"></div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col s1"></div>
+  <div class="col s10">
+
+    <!-- Ticket actual (traido o en edición) -->
+    <table class="table" id="ticket-table">
+      <thead>
+      <tr>
+        <th scope="col">Total</th>
+        <th scope="col">Date</th>
+        <th scope="col">Client</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+        <th scope="col">View details</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row">#1</th>
+        <td>Client name</td>
+        <td>Product name</td>
+        <td>1</td>
+        <td><button class="btn btn-danger table-ticket-delete"><strong>x</strong></button></td>
+      </tr>
+      <tr>
+        <th scope="row">#2</th>
+        <td>Client name</td>
+        <td>Product name</td>
+        <td>3</td>
+        <td><button class="btn btn-danger table-ticket-delete"><strong>x</strong></button></td>
+      </tr>
+      <tr>
+        <th scope="row">#3</th>
+        <td>Client name</td>
+        <td>Product name</td>
+        <td>2</td>
+        <td><button class="btn btn-danger table-ticket-delete"><strong>x</strong></button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col s1"></div>
+</div>
+

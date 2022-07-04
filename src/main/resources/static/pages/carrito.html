@@ -1,53 +1,88 @@
-<h1>Carrito</h1>
+<h4>Cart</h4>
 
-<!-- Agregar detalle a un ticket -->
-<form class="d-flex flex-row justify-content-center gap-1em" method="POST" action="" id="form-cart" name="form-cart">
-  <label for="carrito-client">Select client</label>
-  <select name="carrito-client" id="carrito-client">
-    <option selected disabled value="">Select client</option>
-  </select>
-  <label for="carrito-product">Select product</label>
-  <select name="carrito-product" id="carrito-product">
-    <option selected disabled value="">Select product</option>
-  </select>
-  <label for="carrito-product-qty">Product quantity</label>
-  <input type="number" name="carrito-product-qty" id="carrito-product-qty" min="1" max="3" step="1"></input>
-  <input type="submit" id="product-submit" value="Add producto to carrito"></input>
-</form>
-<!-- Ticket actual (traido o en edición) -->
-<table class="table" id="carrito-table">
-  <thead>
-    <tr>
-      <th scope="col">Product</th>
-      <th scope="col">Qty</th>
-      <th scope="col">Edit</th>
-      <th scope="col">Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">#1</th>
-      <td>Client name</td>
-      <td>Product name</td>
-      <td>1</td>
-      <td><button class="btn btn-danger table-ticketdetail-delete"><strong>x</strong></button></td>
-    </tr>
-    <tr>
-      <th scope="row">#2</th>
-      <td>Client name</td>
-      <td>Product name</td>
-      <td>3</td>
-      <td><button class="btn btn-danger table-ticketdetail-delete"><strong>x</strong></button></td>
-    </tr>
-    <tr>
-      <th scope="row">#3</th>
-      <td>Client name</td>
-      <td>Product name</td>
-      <td>2</td>
-      <td><button class="btn btn-danger table-ticketdetail-delete"><strong>x</strong></button></td>
-    </tr>
-  </tbody>
-</table>
-<div id="ticket-button-group" class="d-flex flex-row justify-content-center align-items-center">
-  <button id="ticket-submit" class="btn btn-success">Submit ticket</button>
+
+<div class="row">
+  <div class="col s4"></div>
+  <div class="col s4" style="border: 1px solid deepskyblue; padding: 20px;background-color: rgba(210,210,210,0.3);  " >
+    <!-- Agregar detalle a un ticket -->
+
+    <form class="row" method="POST" action="" id="form-cart" name="form-cart" >
+      <div class="col s1"></div>
+      <div class="col s10">
+        <h5>Add Product To Cart</h5>
+        <p> Select client</p>
+        <select name="carrito-client" style="display: block;margin-bottom: 2%;" id="carrito-client">
+              <option  value="">Select client</option>
+          </select>
+
+        <p>Select product</p>
+          <select name="carrito-product" style="display: block;margin-bottom: 2%;" id="carrito-product">
+            <option  value="">Select product</option>
+          </select>
+
+      <p>Product quantity (max 3)</p>
+              <input type="number" name="carrito-product-qty" id="carrito-product-qty" style="background-color: white;margin-bottom: 2%; border: 1px gray"min="1" max="3" step="1">
+      <input type="submit" class="waves-effect waves-light btn" id="product-submit" value="Add">
+      </div>
+    </form>
+      <hr>
+    <div id="ticket-button-group" class="d-flex flex-row justify-content-center align-items-center">
+      <button id="ticket-submit" class="waves-effect waves-light btn">Submit ticket</button>
+    </div>
+
+  </div>
+  <div class="col s4"></div>
 </div>
+
+<!-- Ticket actual (traido o en edición) -->
+
+<div class="row">
+  <div class="col s1"></div>
+  <div class="col s10">
+
+    <table class="table" id="carrito-table">
+      <thead>
+      <tr>
+        <th scope="col">Product</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row">#1</th>
+        <td>Client name</td>
+        <td>Product name</td>
+        <td>1</td>
+        <td><button class="btn btn-danger table-ticketdetail-delete"><strong>x</strong></button></td>
+      </tr>
+      <tr>
+        <th scope="row">#2</th>
+        <td>Client name</td>
+        <td>Product name</td>
+        <td>3</td>
+        <td><button class="btn btn-danger table-ticketdetail-delete"><strong>x</strong></button></td>
+      </tr>
+      <tr>
+        <th scope="row">#3</th>
+        <td>Client name</td>
+        <td>Product name</td>
+        <td>2</td>
+        <td><button class="btn btn-danger table-ticketdetail-delete"><strong>x</strong></button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col s1"></div>
+</div>
+
+
+
+<!--<div class="row">
+  <div class="col s1"></div>
+  <div class="col s10">
+
+  </div>
+  <div class="col s1"></div>
+</div>-->

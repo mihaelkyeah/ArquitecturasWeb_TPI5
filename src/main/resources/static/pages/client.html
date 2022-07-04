@@ -1,10 +1,22 @@
-<h1>clients</h1>
+<h4>Clients</h4>
+<div class="row">
+    <div class="col s3"></div>
+    <div class="col s6">
+        <h5>Add Client</h5>
 <form id="add-client" name="add-client" method="POST">
     <input type="text" id="client-name" name="client-name" placeholder="Enter name"></input>
     <input type="text" id="client-lastName" name="client-lastName" placeholder="Enter last name"></input>
     <input type="email" id="client-email" name="client-email" placeholder="Enter email address"></input>
-    <input type="submit" id="client-submit" value="Add client"></input>
+    <input type="submit" id="client-submit" value="Save" class="waves-effect waves-light btn"></input>
 </form>
+    </div>
+        <div class="col s3"></div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col s1"></div>
+    <div class="col s10">
 <!-- Lista de clientes -->
 <table class="table" id="client-table" name ="client-table">
     <thead>
@@ -40,4 +52,6 @@
         </tr>
     </tbody>
 </table>
-
+    </div>
+        <div class="col s1"></div>
+</div>

@@ -115,9 +115,9 @@ cargar(){
     //Crea el boton de editar
     let celEditar = fila.insertCell(0);
     let btnEditar = document.createElement("button");
-    btnEditar.innerHTML = "Editar";
+    btnEditar.innerHTML = "<i class=\"large material-icons\">create</i>";
     btnEditar.type = "button";
-
+    btnEditar.className = "btn waves-effect waves-light amber";
     btnEditar.addEventListener('click', e => { 
         this.editarElemento(fila);
     });
@@ -127,8 +127,9 @@ cargar(){
     //Crea el boton de borrar
     let celBorrar = fila.insertCell(0);
     let btnBorrar = document.createElement("button");
-    btnBorrar.innerHTML = "Borrar";
+    btnBorrar.innerHTML = "<i class=\"large material-icons\">delete_forever</i>";
     btnBorrar.type = "button";
+    btnBorrar.className = "btn waves-effect waves-light red";
     btnBorrar.addEventListener('click', e => { 
         this.tabla.removeChild(fila);
     });
@@ -155,8 +156,9 @@ guardarCambios(fila, valorAnterior)
     else {fila.children[1].innerHTML = valorAnterior;}
     //Vuelve a poner el mismo boton que estaba antes, esto se hizo porque si solo modificabas el evento bucleaba
     let btnEditar = document.createElement("button");
-    btnEditar.innerHTML = "Editar";
+    btnEditar.innerHTML = "<i class=\"large material-icons\">create</i>";
     btnEditar.type = "button";
+    btnEditar.className = "btn waves-effect waves-light amber";
     btnEditar.addEventListener('click', e => { this.editarElemento(fila);});
     fila.replaceChild(btnEditar,fila.children[2]);
 }
@@ -169,8 +171,9 @@ guardarCambios(fila, valorAnterior)
     fila.children[1].contentEditable = "true";
     //Se crea un boton que al apretarse confirma los cambios, este reemplaza el boton anterior
     let btnGuardar = document.createElement("button");
-    btnGuardar.innerHTML = "Guardar";
+    btnGuardar.innerHTML = "<i class=\"large material-icons\">check</i>";
     btnGuardar.type = "button";
+    btnGuardar.className = "btn waves-effect waves-light green";
     btnGuardar.addEventListener('click', e => { this.guardarCambios(fila, valorAnterior);});
     fila.replaceChild(btnGuardar,fila.children[2]);
 }
@@ -181,6 +184,8 @@ limpiarTabla(){
         this.tabla.deleteRow(-1);
     }
 }
+
+
 
 iniciarPagina() {
     this.limpiarTabla();
