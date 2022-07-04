@@ -51,9 +51,9 @@ cargar(elemento){
     //Crea el boton de editar
     let celEditar = fila.insertCell(0);
     let btnEditar = document.createElement("button");
-    btnEditar.innerHTML = "<i class=\"large material-icons\">create</i>";
+    btnEditar.innerHTML = "Editar";
     btnEditar.type = "button";
-    btnEditar.className = "btn waves-effect waves-light amber";
+
     btnEditar.addEventListener('click', e => { 
         this.editarElemento(fila, id);
     });
@@ -63,9 +63,8 @@ cargar(elemento){
     //Crea el boton de borrar
     let celBorrar = fila.insertCell(0);
     let btnBorrar = document.createElement("button");
-    btnBorrar.innerHTML = "<i class=\"large material-icons\">delete_forever</i>";
+    btnBorrar.innerHTML = "Borrar";
     btnBorrar.type = "button";
-    btnBorrar.className = "btn waves-effect waves-light red";
     btnBorrar.addEventListener('click', e => { 
         this.borrarElemento(fila, id);
     });
@@ -178,9 +177,8 @@ cargar(elemento){
     else {this.regresarAnteriores(fila, valoresAnteriores);}
     //Vuelve a poner el mismo boton que estaba antes, esto se hizo porque si solo modificabas el evento bucleaba
     let btnEditar = document.createElement("button");
-    btnEditar.innerHTML = "<i class=\"large material-icons\">create</i>";
+    btnEditar.innerHTML = "Editar";
     btnEditar.type = "button";
-    btnEditar.className = "btn waves-effect waves-light amber";
     btnEditar.addEventListener('click', e => { this.editarElemento(fila, id);});
     fila.replaceChild(btnEditar,fila.children[i]);
 }
@@ -194,7 +192,7 @@ cargar(elemento){
     let c = this.tabla.rows[0].cells.length;
     let i = 0;
     children.forEach(child => {
-        if ((i+c-this.cantColumnasIgnora()) < c)
+        if ((i+this.cantColumnasIgnora()) < c)
         {
             valoresAnteriores[i]= child.innerHTML;
             child.contentEditable = "true";
@@ -202,9 +200,8 @@ cargar(elemento){
     });
     //Se crea un boton que al apretarse confirma los cambios, este reemplaza el boton anterior
     let btnGuardar = document.createElement("button");
-    btnGuardar.innerHTML = "<i class=\"large material-icons\">check</i>";
+    btnGuardar.innerHTML = "Guardar";
     btnGuardar.type = "button";
-    btnGuardar.className = "btn waves-effect waves-light green";
     btnGuardar.addEventListener('click', e => { this.guardarCambios(fila, valoresAnteriores, id);});
     fila.replaceChild(btnGuardar,fila.children[c-this.cantColumnasIgnora()]);
 }
