@@ -24,7 +24,7 @@ class carrito{
         }
     };
     for(var key in this.carrito){
-        let details = {"idTicket":0, "idProduct":key, "quantity":this.carrito[key],"price":0};
+        let details = {"idTicket":0, "idProduct":key, "quantity":this.carrito[key].toString(),"price":0};
         elemento.ticketDetails.push(details);
     }
     return elemento;
@@ -85,33 +85,32 @@ agregarServidor()
     });
 }
 
- cambioValido(fila){
-    if (fila.children[1].value <1 || fila.children[1].value > 3)
-        {return false;}
-    return true;
-}
 
-productoValido(){
-    let cant = document.getElementById("carrito-product-qty").value;
-    if (this.product.value !== "" && (1 <= cant && cant <= 3))
+
+
+productoValido(cant){
+    if ((this.product.value !== "" && (1 <= cant && cant <= 3) )
+    && ((this.carrito[this.product.value] === undefined) || (Number.parseInt(this.carrito[this.product.value],10)+ Number.parseInt(cant,10) <= 3)))
         {return true;}
+    alert("Se supero el limite de cantidad para este producto");
     return false;
 }
 
-
-cargar(){
+cargarTabla(){
     //Celdas del producto
-    console.log(this.carrito);
-    let valor = document.getElementById("carrito-product-qty").value;
-    let clave =     this.product.value;
+    while ((this.tabla.rows.length - 1) > 0)
+    {
+        this.tabla.deleteRow(-1);
+    }
     let fila = this.tabla.insertRow(-1);
-    let cel = fila.insertCell(0);
-
-    cel.innerHTML =  valor;
-    let cel2 = fila.insertCell(0);
-    cel2.innerHTML =clave;
-    (this.carrito[clave] === undefined) ? this.carrito[clave] = valor : this.carrito[clave] = Number.parseInt(this.carrito[clave],10)+ valor;
-    console.log(this.carrito);
+    for(var key in this.carrito){
+        let cel = fila.insertCell(0);
+        cel.innerHTML = key;
+        fila.appendChild(cel);
+        let cel2 = fila.insertCell(0);
+        cel2.innerHTML =this.carrito[key];
+        fila.appendChild(cel2);
+    }
     //Crea el boton de editar
     let celEditar = fila.insertCell(0);
     let btnEditar = document.createElement("button");
@@ -133,12 +132,20 @@ cargar(){
     btnBorrar.addEventListener('click', e => { 
         this.tabla.removeChild(fila);
         delete this.carrito[clave];
-        console.log(this.carrito);
     });
     celBorrar.appendChild(btnBorrar);
     fila.appendChild(celBorrar);
     //Agregado de la fila
     this.tabla.appendChild(fila);
+}
+
+cargar(){
+    //Celdas del producto
+    console.log(this.carrito);
+    let valor = document.getElementById("carrito-product-qty").value;
+    let clave = this.product.value;
+    (this.carrito[clave] === undefined) ? this.carrito[clave] = Number.parseInt(valor,10) : this.carrito[clave] = Number.parseInt(this.carrito[clave],10)+ Number.parseInt(valor,10);
+    this.cargarTabla();
 }
 
 //Esta funcion deja de permitir la edicion de la tabla y que cambios ocurren
@@ -147,7 +154,7 @@ guardarCambios(fila, valorAnterior)
     //Deja de poder se editable
     fila.children[1].contentEditable = "false";
     //Verifica si esta todo bien
-    if (this.cambioValido(fila))
+    if (this.productoValido(Number.parseInt(fila.children[1].innerHTML,10)))
     {
         //Pregunta si esta seguro
         if (!confirm("¿Seguro que desea modificar?"))
@@ -201,7 +208,7 @@ iniciarPagina() {
     });
     document.querySelector('#product-submit').addEventListener('click', (event) => {
         event.preventDefault();
-        if(this.productoValido())
+        if(this.productoValido(document.getElementById("carrito-product-qty").value))
         {this.cargar();}
     });
 }
