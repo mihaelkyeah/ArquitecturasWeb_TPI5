@@ -102,16 +102,15 @@ cargarTabla(){
     {
         this.tabla.deleteRow(-1);
     }
-    let fila = this.tabla.insertRow(-1);
     for(var key in this.carrito){
+        let fila = this.tabla.insertRow(-1);
         let cel = fila.insertCell(0);
         cel.innerHTML = key;
         fila.appendChild(cel);
         let cel2 = fila.insertCell(0);
         cel2.innerHTML =this.carrito[key];
         fila.appendChild(cel2);
-    }
-    //Crea el boton de editar
+         //Crea el boton de editar
     let celEditar = fila.insertCell(0);
     let btnEditar = document.createElement("button");
     btnEditar.innerHTML = "<i class=\"large material-icons\">create</i>";
@@ -137,11 +136,12 @@ cargarTabla(){
     fila.appendChild(celBorrar);
     //Agregado de la fila
     this.tabla.appendChild(fila);
+    }
+   
 }
 
 cargar(){
     //Celdas del producto
-    console.log(this.carrito);
     let valor = document.getElementById("carrito-product-qty").value;
     let clave = this.product.value;
     (this.carrito[clave] === undefined) ? this.carrito[clave] = Number.parseInt(valor,10) : this.carrito[clave] = Number.parseInt(this.carrito[clave],10)+ Number.parseInt(valor,10);
@@ -154,7 +154,7 @@ guardarCambios(fila, valorAnterior)
     //Deja de poder se editable
     fila.children[1].contentEditable = "false";
     //Verifica si esta todo bien
-    if (this.productoValido(Number.parseInt(fila.children[1].innerHTML,10)))
+    if (1 <= (Number.parseInt(fila.children[1].innerHTML,10)) && (Number.parseInt(fila.children[1].innerHTML,10) <=3 ))
     {
         //Pregunta si esta seguro
         if (!confirm("¿Seguro que desea modificar?"))
@@ -162,7 +162,7 @@ guardarCambios(fila, valorAnterior)
             fila.children[1].innerHTML = valorAnterior;
             
         }else{ let key = fila.children[0].innerHTML;
-            this.carrito[key]= fila.children[1].innerHTML;}
+            this.carrito[key]= (Number.parseInt(fila.children[1].innerHTML,10));}
     }
     else {fila.children[1].innerHTML = valorAnterior;}
     //Vuelve a poner el mismo boton que estaba antes, esto se hizo porque si solo modificabas el evento bucleaba
