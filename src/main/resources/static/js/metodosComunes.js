@@ -48,11 +48,13 @@ cargar(elemento){
         let cel = fila.insertCell(0);
         cel.innerHTML = elemento[key];
     }
+
     //Crea el boton de editar
     let celEditar = fila.insertCell(0);
     let btnEditar = document.createElement("button");
-    btnEditar.innerHTML = "Editar";
+    btnEditar.innerHTML = "<i class=\"large material-icons\">create</i>";
     btnEditar.type = "button";
+    btnEditar.className = "btn waves-effect waves-light amber";
 
     btnEditar.addEventListener('click', e => { 
         this.editarElemento(fila, id);
@@ -63,8 +65,9 @@ cargar(elemento){
     //Crea el boton de borrar
     let celBorrar = fila.insertCell(0);
     let btnBorrar = document.createElement("button");
-    btnBorrar.innerHTML = "Borrar";
+    btnBorrar.innerHTML = "<i class=\"large material-icons\">delete_forever</i>";
     btnBorrar.type = "button";
+    btnBorrar.className = "btn waves-effect waves-light red";
     btnBorrar.addEventListener('click', e => { 
         this.borrarElemento(fila, id);
     });
