@@ -26,6 +26,11 @@ cargar(elemento){
 }
 
 }
+window.addEventListener('load', () => {
+    document.querySelector('#ticketDetail-link-return').addEventListener('click', () => {
+        document.querySelector('#pag4').click();
+    });
+})
 /*
 class ticketDetail extends metodosComunes {
   constructor(id) {
